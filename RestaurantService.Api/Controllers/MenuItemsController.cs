@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 using RestaurantService.Api;
 using RestaurantService.Api.Data;
@@ -94,6 +95,23 @@ namespace RestaurantService.Api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetMenuItem", new { id = menuItem.Id }, menuItem);
+        }
+
+        [Route("AddMany")]
+        [HttpPost()]
+        public async Task<ActionResult<List<MenuItem>>> PostMenuItems([FromBody]IEnumerable<MenuItem> menuItems) {
+            if (_context.MenuItem == null) {
+                return Problem("Entity set 'RestaurantServiceApiContext.MenuItem'  is null.");
+            }
+
+            var itemsCreated = new List<MenuItem>();
+            foreach(var item in menuItems) {
+                itemsCreated.Add(_context.MenuItem.Add(item).Entity);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return itemsCreated;
         }
 
         // DELETE: api/MenuItems/5
