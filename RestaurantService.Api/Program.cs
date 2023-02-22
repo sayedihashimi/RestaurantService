@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RestaurantService.Api.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<RestaurantServiceApiContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("RestaurantServiceApiContext") ?? throw new InvalidOperationException("Connection string 'RestaurantServiceApiContext' not found.")));
 
 // Add services to the container.
 
