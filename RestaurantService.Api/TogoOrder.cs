@@ -6,6 +6,7 @@
         public Decimal? Subtotal { get; set; }
         public Decimal? Tax { get; set; }
         public Decimal? Total { get; set; }
-        public PaymentMethod PaymentMethod { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
+        public Contact? Customer { get; set; }
     }
 }

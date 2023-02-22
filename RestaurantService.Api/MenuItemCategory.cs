@@ -1,8 +1,8 @@
 ﻿namespace RestaurantService.Api {
     public enum MenuItemCategory {
-        Breakfast,
-        Lunch,
-        Dinner,
-        Drink
+        Breakfast = 0,
+        Lunch = 1,
+        Dinner = 2,
+        Drink = 3
     }
 }
