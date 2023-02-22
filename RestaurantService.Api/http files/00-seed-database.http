@@ -3,6 +3,8 @@
 GET https://localhost:7277/api/MenuItems
 
 ###
+
+// populate the MenuItems table
 POST https://localhost:7277/api/MenuItems/AddMany
 Content-Type: application/json
 
@@ -62,3 +64,27 @@ Content-Type: application/json
     "category": 2
   }
 ]
+###
+
+// populate a few customers in the Contact table
+POST https://localhost:7277/api/Contacts/AddMany
+Content-Type: application/json
+
+[
+  {
+    "name": "Sayed Hashimi",
+    "email": "sayed@example.com",
+    "phone": "555-111-2222"
+  },
+    {
+    "name": "MadsK",
+    "email": "madsk@example.com",
+    "phone": "555-111-3333"
+  }
+]
+
+###
+
+GET https://localhost:7277/api/Contacts
+
+###

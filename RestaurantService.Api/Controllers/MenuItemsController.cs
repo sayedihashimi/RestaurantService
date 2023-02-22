@@ -101,7 +101,7 @@ namespace RestaurantService.Api.Controllers
         [HttpPost()]
         public async Task<ActionResult<List<MenuItem>>> PostMenuItems([FromBody]IEnumerable<MenuItem> menuItems) {
             if (_context.MenuItem == null) {
-                return Problem("Entity set 'RestaurantServiceApiContext.MenuItem'  is null.");
+                return Problem("Entity set 'RestaurantServiceApiContext.MenuItems' is null.");
             }
 
             var itemsCreated = new List<MenuItem>();

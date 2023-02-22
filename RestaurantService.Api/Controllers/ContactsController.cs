@@ -96,6 +96,23 @@ namespace RestaurantService.Api.Controllers
             return CreatedAtAction("GetContact", new { id = contact.Id }, contact);
         }
 
+        [Route("AddMany")]
+        [HttpPost]
+        public async Task<ActionResult<List<Contact>>>PostContacts([FromBody]List<Contact> contacts) {
+            if (_context.Contact == null) {
+                return Problem("Entity set 'RestaurantServiceApiContext.MenuItems' is null.");
+            }
+            var itemCreated = new List<Contact>();
+            foreach(var contact in contacts) {
+                itemCreated.Add((await _context.Contact.AddAsync(contact)).Entity);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return itemCreated;
+        }
+
+
         // DELETE: api/Contacts/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContact(int id)
