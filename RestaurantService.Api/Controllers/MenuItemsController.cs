@@ -97,23 +97,6 @@ namespace RestaurantService.Api.Controllers
             return CreatedAtAction("GetMenuItem", new { id = menuItem.Id }, menuItem);
         }
 
-        [Route("AddMany")]
-        [HttpPost()]
-        public async Task<ActionResult<List<MenuItem>>> PostMenuItems([FromBody]IEnumerable<MenuItem> menuItems) {
-            if (_context.MenuItem == null) {
-                return Problem("Entity set 'RestaurantServiceApiContext.MenuItems' is null.");
-            }
-
-            var itemsCreated = new List<MenuItem>();
-            foreach(var item in menuItems) {
-                itemsCreated.Add(_context.MenuItem.Add(item).Entity);
-            }
-
-            await _context.SaveChangesAsync();
-
-            return itemsCreated;
-        }
-
         // DELETE: api/MenuItems/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMenuItem(int id)
