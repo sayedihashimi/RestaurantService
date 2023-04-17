@@ -1,0 +1,9 @@
+﻿@RestaurantService.Api_HostAddress = https://localhost:7277
+
+GET {{RestaurantService.Api_HostAddress}}/api/contacts
+
+###
+
+GET {{RestaurantService.Api_HostAddress}}/api/contacts/0
+
+###

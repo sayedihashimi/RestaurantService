@@ -56,12 +56,6 @@ Content-Type: application/json
     "price": 4.59,
     "description": "Mushroom & Swiss burger, with two beef patties",
     "category": 2
-  },
-  {
-    "name":"Mushroom & Swiss burger - double",
-    "price": 4.59,
-    "description": "Mushroom & Swiss burger, with two beef patties",
-    "category": 2
   }
 ]
 ###
@@ -76,10 +70,40 @@ Content-Type: application/json
     "email": "sayed@example.com",
     "phone": "555-111-2222"
   },
-    {
-    "name": "MadsK",
+  {
+    "name": "Mads Kristensen",
     "email": "madsk@example.com",
     "phone": "555-111-3333"
+  },
+  {
+    "name": "Eline Barstad",
+    "email": "elineb@example.com",
+    "phone": "555-111-4444"
+  },
+  {
+    "name": "Theodore Lamy",
+    "email": "theol@example.com",
+    "phone": "555-111-5555"
+  },
+  {
+    "name": "María Zelaya",
+    "email": "mariaz@example.com",
+    "phone": "555-111-6666"
+  },
+  {
+    "name": "Kubanychbek Sagynbek",
+    "email": "kubans@example.com",
+    "phone": "555-111-7777"
+  },
+  {
+    "name": "Denise Bourgeois",
+    "email": "deniseb@example.com",
+    "phone": "555-111-8888"
+  },
+  {
+    "name": "Robin Danielsen",
+    "email": "robind@example.com",
+    "phone": "555-111-9999"
   }
 ]
 
