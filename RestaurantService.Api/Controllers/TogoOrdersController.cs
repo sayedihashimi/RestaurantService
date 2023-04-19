@@ -90,7 +90,29 @@ namespace RestaurantService.Api.Controllers
           {
               return Problem("Entity set 'RestaurantServiceApiContext.TogoOrder'  is null.");
           }
+
+            togoOrder.Customer = await _context.Contact.FindAsync(togoOrder.Customer!.Id);
+
+            if(togoOrder.OrderCreated == null) {
+                togoOrder.OrderCreated = DateTime.Now;
+            }
+            if(togoOrder.ItemsOrdered != null && togoOrder.ItemsOrdered.Count > 0) {
+                foreach (var item in togoOrder.ItemsOrdered) {
+                    var menuItem = await _context.MenuItem.FindAsync(item.MenuItemId);
+                    item.Name = menuItem!.Name;
+                    if (item.Price is null || !item.Price.HasValue || item.Price.Value < 0) {
+                        item.Price = menuItem.Price!.Value;
+                    }
+                    if(item.Category is null || !item.Category.HasValue) {
+                        item.Category = menuItem.Category!.Value;
+                    }
+                }
+            }
+
             _context.TogoOrder.Add(togoOrder);
+
+
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTogoOrder", new { id = togoOrder.Id }, togoOrder);

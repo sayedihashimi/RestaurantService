@@ -12,11 +12,11 @@ namespace RestaurantService.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MenuItemOrderedsController : ControllerBase
+    public class MenuItemOrderedController : ControllerBase
     {
         private readonly RestaurantServiceApiContext _context;
 
-        public MenuItemOrderedsController(RestaurantServiceApiContext context)
+        public MenuItemOrderedController(RestaurantServiceApiContext context)
         {
             _context = context;
         }

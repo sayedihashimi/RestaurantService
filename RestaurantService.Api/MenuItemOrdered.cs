@@ -8,6 +8,7 @@
             Category = item.Category
         };
         public int Id { get; set; }
+        public int MenuItemId { get; set; }
         public int TogoOrderId { get; set; }
         public string? Name { get; set; }
         public decimal? Price { get; set; }

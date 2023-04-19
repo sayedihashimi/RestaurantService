@@ -1,0 +1,74 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+GET https://localhost:7277/api/MenuItems
+
+###
+
+GET https://localhost:7277/api/Contacts
+
+###
+
+POST https://localhost:7277/api/MenuItemOrdereds
+Content-Type: applicaton/json
+
+{
+
+  "name": "string",
+  "price": 0,
+  "category": 0
+}
+
+###
+
+GET https://localhost:7277/api/TogoOrders
+
+###
+
+GET https://localhost:7277/api/TogoOrders/1
+
+###
+
+POST https://localhost:7277/api/TogoOrders
+Content-Type: application/json
+
+{
+  "itemsOrdered": [
+    {
+      "name": "string1",
+      "price": 1.11,
+      "category": 1
+    }
+  ],
+  "subtotal": 1.111,
+  "tax": 0.5,
+  "total": 1.61,
+  "paymentMethod": 1,
+  "customer": {
+    "id": 2
+  }
+}
+
+###
+POST https://localhost:7277/api/TogoOrders
+Content-Type: application/json
+
+{
+  "id": 0,
+  "itemsOrdered": [
+    {
+      "MenuItemId": 1
+    }
+  ],
+  "subtotal": 10.00,
+  "tax": 1.1,
+  "total": 11.10,
+  "paymentMethod": 0,
+  "customer": {
+    "id": 1,
+    "name": "string",
+    "email": "string",
+    "phone": "string"
+  }
+}
+
+###

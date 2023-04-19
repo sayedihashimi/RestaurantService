@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantService.Api.Data;
 
@@ -10,9 +11,11 @@ using RestaurantService.Api.Data;
 namespace RestaurantService.Api.Migrations
 {
     [DbContext(typeof(RestaurantServiceApiContext))]
-    partial class RestaurantServiceApiContextModelSnapshot : ModelSnapshot
+    [Migration("20230419175737_sqlite_migration_153")]
+    partial class sqlite_migration_153
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");

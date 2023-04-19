@@ -1,4 +1,4 @@
-﻿namespace RestaurantService.Api {
+﻿ namespace RestaurantService.Api {
     public class TogoOrder {
         public int Id { get; set; }
         public DateTime? OrderCreated { get; set; }
