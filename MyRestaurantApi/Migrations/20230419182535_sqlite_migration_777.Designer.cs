@@ -2,22 +2,25 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RestaurantService.Api.Data;
+using MyRestaurantApi.Data;
 
 #nullable disable
 
-namespace RestaurantService.Api.Migrations
+namespace MyRestaurantApi.Migrations
 {
-    [DbContext(typeof(RestaurantServiceApiContext))]
-    partial class RestaurantServiceApiContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MyRestaurantApiContext))]
+    [Migration("20230419182535_sqlite_migration_777")]
+    partial class sqlite_migration_777
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
 
-            modelBuilder.Entity("RestaurantService.Api.Contact", b =>
+            modelBuilder.Entity("MyRestaurantApi.Contact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -95,7 +98,7 @@ namespace RestaurantService.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestaurantService.Api.MenuItem", b =>
+            modelBuilder.Entity("MyRestaurantApi.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,7 +171,7 @@ namespace RestaurantService.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestaurantService.Api.MenuItemOrdered", b =>
+            modelBuilder.Entity("MyRestaurantApi.MenuItemOrdered", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -191,63 +194,7 @@ namespace RestaurantService.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TogoOrderId");
-
                     b.ToTable("MenuItemOrdered");
-                });
-
-            modelBuilder.Entity("RestaurantService.Api.TogoOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("OrderCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("PaymentMethod")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal?>("Subtotal")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("Tax")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("Total")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("TogoOrder");
-                });
-
-            modelBuilder.Entity("RestaurantService.Api.MenuItemOrdered", b =>
-                {
-                    b.HasOne("RestaurantService.Api.TogoOrder", null)
-                        .WithMany("ItemsOrdered")
-                        .HasForeignKey("TogoOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RestaurantService.Api.TogoOrder", b =>
-                {
-                    b.HasOne("RestaurantService.Api.Contact", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("RestaurantService.Api.TogoOrder", b =>
-                {
-                    b.Navigation("ItemsOrdered");
                 });
 #pragma warning restore 612, 618
         }

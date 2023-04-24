@@ -3,31 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using RestaurantService.Api;
+using MyRestaurantApi;
 
-namespace RestaurantService.Api.Data
+namespace MyRestaurantApi.Data
 {
-    public class RestaurantServiceApiContext : DbContext
+    public class MyRestaurantApiContext : DbContext
     {
-        public RestaurantServiceApiContext (DbContextOptions<RestaurantServiceApiContext> options)
+        public MyRestaurantApiContext (DbContextOptions<MyRestaurantApiContext> options)
             : base(options)
         {
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-
             modelBuilder.Entity<MenuItem>().HasData(GetSeedDataMenuItems());
             modelBuilder.Entity<Contact>().HasData(GetSeedDataContacts());
-
         }
+        public DbSet<MyRestaurantApi.Contact> Contact { get; set; } = default!;
 
-        public DbSet<RestaurantService.Api.Contact> Contact { get; set; } = default!;
+        public DbSet<MyRestaurantApi.MenuItem> MenuItem { get; set; } = default!;
 
-        public DbSet<RestaurantService.Api.MenuItem> MenuItem { get; set; } = default!;
-
-        public DbSet<RestaurantService.Api.MenuItemOrdered> MenuItemOrdered { get; set; } = default!;
-
-        public DbSet<RestaurantService.Api.TogoOrder> TogoOrder { get; set; } = default!;
+        public DbSet<MyRestaurantApi.MenuItemOrdered> MenuItemOrdered { get; set; } = default!;
 
         private MenuItem[] GetSeedDataMenuItems() => new MenuItem[] {
             new MenuItem {
@@ -123,5 +117,6 @@ namespace RestaurantService.Api.Data
                 Phone = "555-111-9999"
             }
         };
+        public DbSet<MyRestaurantApi.TogoOrder> TogoOrder { get; set; } = default!;
     }
 }

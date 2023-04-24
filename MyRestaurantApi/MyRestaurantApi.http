@@ -1,0 +1,73 @@
+﻿@MyRestaurantApi_HostAddress = https://localhost:7293
+
+Get {{MyRestaurantApi_HostAddress}}/api/Contact/
+
+###
+
+Get {{MyRestaurantApi_HostAddress}}/api/MenuItem/
+
+###
+
+Get {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+
+###
+
+Get {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+
+###
+
+Post {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+Content-Type: application/json
+
+{
+  "itemsOrdered": [
+    {
+      "menuItemId":1,
+      "name": "string1",
+      "price": 1.11,
+      "category": 1
+    }
+  ],
+  "subtotal": 1.111,
+  "tax": 0.5,
+  "total": 1.61,
+  "paymentMethod": 1,
+  "customer": {
+    "id": 2
+  }
+}
+###
+Post {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+Content-Type: application/json
+
+{
+  "itemsOrdered": [
+    {
+      "menuItemId":1,
+      "price": 1.11,
+      "category": 1
+    },
+    {
+      "menuItemId":2
+    },
+    {
+      "menuItemId":3
+    },
+    {
+      "menuItemId":3
+    },
+    {
+      "menuItemId":4
+    },
+    {
+      "menuItemId":4
+    }
+  ],
+  "subtotal": 15.99,
+  "tax": 1.1,
+  "total": 17.00,
+  "paymentMethod": 2,
+  "customer": {
+    "id": 2
+  }
+}

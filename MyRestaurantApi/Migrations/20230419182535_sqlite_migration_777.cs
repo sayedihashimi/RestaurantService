@@ -1,14 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace RestaurantService.Api.Migrations
+namespace MyRestaurantApi.Migrations
 {
     /// <inheritdoc />
-    public partial class sqlite_migration_172 : Migration
+    public partial class sqlite_migration_777 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,34 +44,12 @@ namespace RestaurantService.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TogoOrder",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    OrderCreated = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Subtotal = table.Column<decimal>(type: "TEXT", nullable: true),
-                    Tax = table.Column<decimal>(type: "TEXT", nullable: true),
-                    Total = table.Column<decimal>(type: "TEXT", nullable: true),
-                    PaymentMethod = table.Column<int>(type: "INTEGER", nullable: true),
-                    CustomerId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TogoOrder", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TogoOrder_Contact_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Contact",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MenuItemOrdered",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    MenuItemId = table.Column<int>(type: "INTEGER", nullable: false),
                     TogoOrderId = table.Column<int>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<decimal>(type: "TEXT", nullable: true),
@@ -81,12 +58,6 @@ namespace RestaurantService.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MenuItemOrdered", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MenuItemOrdered_TogoOrder_TogoOrderId",
-                        column: x => x.TogoOrderId,
-                        principalTable: "TogoOrder",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -116,32 +87,19 @@ namespace RestaurantService.Api.Migrations
                     { 5, 1, "Mushroom & Swiss burger", "Mushroom & Swiss burger", 4.59m },
                     { 6, 1, "Mushroom & Swiss burger, with two beef patties", "Mushroom & Swiss burger - double", 6.09m }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MenuItemOrdered_TogoOrderId",
-                table: "MenuItemOrdered",
-                column: "TogoOrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TogoOrder_CustomerId",
-                table: "TogoOrder",
-                column: "CustomerId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Contact");
+
+            migrationBuilder.DropTable(
                 name: "MenuItem");
 
             migrationBuilder.DropTable(
                 name: "MenuItemOrdered");
-
-            migrationBuilder.DropTable(
-                name: "TogoOrder");
-
-            migrationBuilder.DropTable(
-                name: "Contact");
         }
     }
 }

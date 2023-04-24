@@ -1,4 +1,4 @@
-﻿namespace RestaurantService.Api {
+﻿namespace MyRestaurantApi {
     public enum PaymentMethod {
         CreditCard,
         Cash,

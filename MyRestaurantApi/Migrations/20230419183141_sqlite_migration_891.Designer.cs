@@ -4,23 +4,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RestaurantService.Api.Data;
+using MyRestaurantApi.Data;
 
 #nullable disable
 
-namespace RestaurantService.Api.Migrations
+namespace MyRestaurantApi.Migrations
 {
-    [DbContext(typeof(RestaurantServiceApiContext))]
-    [Migration("20230417195056_sqlite_migration_172")]
-    partial class sqlite_migration_172
+    [DbContext(typeof(MyRestaurantApiContext))]
+    [Migration("20230419183141_sqlite_migration_891")]
+    partial class sqlite_migration_891
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
 
-            modelBuilder.Entity("RestaurantService.Api.Contact", b =>
+            modelBuilder.Entity("MyRestaurantApi.Contact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -98,7 +98,7 @@ namespace RestaurantService.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestaurantService.Api.MenuItem", b =>
+            modelBuilder.Entity("MyRestaurantApi.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,13 +171,16 @@ namespace RestaurantService.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestaurantService.Api.MenuItemOrdered", b =>
+            modelBuilder.Entity("MyRestaurantApi.MenuItemOrdered", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("Category")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MenuItemId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -196,7 +199,7 @@ namespace RestaurantService.Api.Migrations
                     b.ToTable("MenuItemOrdered");
                 });
 
-            modelBuilder.Entity("RestaurantService.Api.TogoOrder", b =>
+            modelBuilder.Entity("MyRestaurantApi.TogoOrder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,25 +230,25 @@ namespace RestaurantService.Api.Migrations
                     b.ToTable("TogoOrder");
                 });
 
-            modelBuilder.Entity("RestaurantService.Api.MenuItemOrdered", b =>
+            modelBuilder.Entity("MyRestaurantApi.MenuItemOrdered", b =>
                 {
-                    b.HasOne("RestaurantService.Api.TogoOrder", null)
+                    b.HasOne("MyRestaurantApi.TogoOrder", null)
                         .WithMany("ItemsOrdered")
                         .HasForeignKey("TogoOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RestaurantService.Api.TogoOrder", b =>
+            modelBuilder.Entity("MyRestaurantApi.TogoOrder", b =>
                 {
-                    b.HasOne("RestaurantService.Api.Contact", "Customer")
+                    b.HasOne("MyRestaurantApi.Contact", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("RestaurantService.Api.TogoOrder", b =>
+            modelBuilder.Entity("MyRestaurantApi.TogoOrder", b =>
                 {
                     b.Navigation("ItemsOrdered");
                 });

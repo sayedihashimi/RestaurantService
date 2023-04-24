@@ -1,4 +1,4 @@
-﻿namespace RestaurantService.Api {
+﻿namespace MyRestaurantApi {
     public class MenuItemOrdered {
         public MenuItemOrdered() { }
         public MenuItemOrdered BuildFromMenuItem(MenuItem item, int togoOrderId) => new MenuItemOrdered {
@@ -13,6 +13,6 @@
         public string? Name { get; set; }
         public decimal? Price { get; set; }
         public MenuItemCategory? Category { get; set; }
-    
+
     }
 }
