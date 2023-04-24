@@ -1,8 +1,7 @@
-﻿namespace MyRestaurantApi {
-    public enum OrderStatus {
-        Submitted,
-        InProgress,
-        Completed,
-        PickedUp
-    }
+﻿namespace MyRestaurantApi; 
+public enum OrderStatus {
+    Submitted,
+    InProgress,
+    Completed,
+    PickedUp
 }
