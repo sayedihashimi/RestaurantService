@@ -12,7 +12,9 @@ public static class TogoOrderEndpoints
 
         group.MapGet("/", async (MyRestaurantApiContext db) =>
         {
-            return await db.TogoOrder.ToListAsync();
+            return await db.TogoOrder
+                .Include(order => order.ItemsOrdered)
+                .ToListAsync();
         })
         .WithName("GetAllTogoOrders")
         .WithOpenApi();
