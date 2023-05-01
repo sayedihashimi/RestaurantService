@@ -4,10 +4,11 @@ Get {{MyRestaurantApi_HostAddress}}/api/Contact/
 
 ###
 
-Get {{MyRestaurantApi_HostAddress}}/api/MenuItem/
+Get http://localhost:5192/api/MenuItem/
 
 ###
-
+GET {{MyRestaurantApi_HostAddress}}/api/MenuItemOrdered
+###
 Get {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
 
 ###
@@ -22,15 +23,12 @@ Content-Type: application/json
 {
   "itemsOrdered": [
     {
-      "menuItemId":1,
-      "name": "string1",
-      "price": 1.11,
-      "category": 1
+      "menuItemId":1
     }
   ],
-  "subtotal": 1.111,
-  "tax": 0.5,
-  "total": 1.61,
+  "subtotal": 3.50,
+  "tax": 0.8,
+  "total": 4.30,
   "paymentMethod": 1,
   "customer": {
     "id": 2
@@ -71,3 +69,11 @@ Content-Type: application/json
     "id": 2
   }
 }
+
+GET {{MyRestaurantApi_HostAddress}}/api/MenuItem/
+
+###
+
+Get {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+
+###
