@@ -15,5 +15,7 @@ namespace MyRestaurantApi.Data
         }
 
         public DbSet<MyRestaurantApi.Contact> Contact { get; set; } = default!;
+
+        public DbSet<MyRestaurantApi.AdminContact> AdminContact { get; set; } = default!;
     }
 }
