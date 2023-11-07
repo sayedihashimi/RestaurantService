@@ -1,0 +1,8 @@
+{
+  "dev": {
+    "Message": "Hello from dev"
+  },
+  "staging": {
+    "Message": "Hello from staging"
+  }
+}

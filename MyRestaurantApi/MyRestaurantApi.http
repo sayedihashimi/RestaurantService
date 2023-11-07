@@ -1,10 +1,40 @@
 ﻿@MyRestaurantApi_HostAddress = https://localhost:7293
+@contactRoute = /api/Contact
+@contentType = application/json
 
-Get {{MyRestaurantApi_HostAddress}}/api/Contact/
+GET https://localhost:123
+
+###
+###
+Get {{MyRestaurantApi_HostAddress}}{{contactRoute}}
+
+###
+Get {{MyRestaurantApi_HostAddress}}/api/Contact/3
+
+###
+PUT {{MyRestaurantApi_HostAddress}}/api/Contact/3
+Content-Type: {{contentType}}
+
+{
+  "id": 3,
+  "name": "Eline Barstad",
+  "email": "elineb@example.com",
+  "phone": "555-212-5658"
+}
 
 ###
 
-Get http://localhost:5192/api/MenuItem/
+POST https://localhost:7293/api/Contact
+Content-Type: application/json
+
+{
+  "name": "Eline Barstad",
+  "email": "elineb@example.com",
+  "phone": "555-212-5658"
+}
+
+###
+GET http://localhost:5192/api/MenuItem/
 
 ###
 GET {{MyRestaurantApi_HostAddress}}/api/MenuItemOrdered
@@ -36,7 +66,7 @@ Content-Type: application/json
 }
 ###
 Post {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
-Content-Type: application/json
+Content-Type:  application/json
 
 {
   "itemsOrdered": [
@@ -70,10 +100,88 @@ Content-Type: application/json
   }
 }
 
+###
 GET {{MyRestaurantApi_HostAddress}}/api/MenuItem/
 
 ###
 
 Get {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+###
+@newmsg = {{Message}}
+PUT https://httpbin.org/anything
+Content-Type: application/json
+
+{
+    "content": "content here",
+    "message": {{newmsg}}
+}
+
+###
+
+@LocalMessage = {{userDbConnectionString}}/{{ApiKey}}/{{otherSecret}}
+@OtherMsg = {{Message}}/
+
+###
+PUT https://httpbin.org/anything
+Content-Type: application/json
+
+{
+    "content": "content here",
+    "message": {{LocalMessage}}
+}
+###
+
+# ------------------------------------------------------------------
+# reqres.in
+# ------------------------------------------------------------------
+@reqHost = https://reqres.in
+@reqUsername = george.bluth@reqres.in
+
+GET {{reqHost}}/api/users
+###
+
+POST https://reqres.in/api/register
+Content-Type: application/json
+
+{
+  "username": "{{reqUsername}}",
+  "email": "hello@example.com",
+  "password": "123456"
+}
+
+###
+POST {{reqHost}}/api/login
+Content-Type: application/json
+
+{
+  "username": "{{reqUsername}}",
+  "email": "{{reqUsername}}",
+  "password": "some password"
+}
+
+###
+GET https://reqres.in/api/{resource}?page=1&per_page=10
+
+###
+GET https://reqres.in/api/{resource}/5
+###
+
+
+GET {{MyRestaurantApi_HostAddress}}/api/Contact/
+
+###
+
+GET {{MyRestaurantApi_HostAddress}}/api/Contact/
+
+###
+
+POST {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+
+{
+
+}
+###
+
+POST {{MyRestaurantApi_HostAddress}}/api/MenuItem/
 
 ###
