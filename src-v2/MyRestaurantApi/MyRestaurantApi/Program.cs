@@ -21,15 +21,10 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
-
 app.MapContactEndpoints();
-
 app.MapAdminContactEndpoints();
-
 app.MapMenuItemEndpoints();
-
 app.MapTogoOrderEndpoints();
-
 app.MapMenuItemOrderedEndpoints();
 
 app.Run();
