@@ -13,7 +13,11 @@ namespace MyRestaurantApi.Data
             : base(options)
         {
         }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MenuItem>().HasData(GetSeedDataMenuItems());
+            modelBuilder.Entity<Contact>().HasData(GetSeedDataContacts());
+        }
         public DbSet<MyRestaurantApi.Contact> Contact { get; set; } = default!;
 
         public DbSet<MyRestaurantApi.AdminContact> AdminContact { get; set; } = default!;
