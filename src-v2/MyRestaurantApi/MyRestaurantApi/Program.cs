@@ -28,4 +28,8 @@ app.MapAdminContactEndpoints();
 
 app.MapMenuItemEndpoints();
 
+app.MapTogoOrderEndpoints();
+
+app.MapMenuItemOrderedEndpoints();
+
 app.Run();
