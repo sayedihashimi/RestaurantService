@@ -1,10 +1,7 @@
-﻿@MyRestaurantApi_HostAddress = https://localhost:7293
+@MyRestaurantApi_HostAddress = https://localhost:7071
 @contactRoute = /api/Contact
 @contentType = application/json
 
-GET https://localhost:123
-
-###
 ###
 Get {{MyRestaurantApi_HostAddress}}{{contactRoute}}
 
