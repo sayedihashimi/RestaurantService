@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using MyRestaurantApi;
 
 namespace MyRestaurantApi.Data
@@ -14,20 +13,13 @@ namespace MyRestaurantApi.Data
             : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // modelBuilder.Entity<Blog>().HasData(new Blog { BlogId = 1, Url = "http://sample.com" });
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<MenuItem>().HasData(GetSeedDataMenuItems());
             modelBuilder.Entity<Contact>().HasData(GetSeedDataContacts());
         }
         public DbSet<MyRestaurantApi.Contact> Contact { get; set; } = default!;
 
-        public DbSet<MyRestaurantApi.AdminContact> AdminContact { get; set; } = default!;
-
         public DbSet<MyRestaurantApi.MenuItem> MenuItem { get; set; } = default!;
-
-        public DbSet<MyRestaurantApi.TogoOrder> TogoOrder { get; set; } = default!;
 
         public DbSet<MyRestaurantApi.MenuItemOrdered> MenuItemOrdered { get; set; } = default!;
 
@@ -125,5 +117,6 @@ namespace MyRestaurantApi.Data
                 Phone = "555-111-9999"
             }
         };
+        public DbSet<MyRestaurantApi.TogoOrder> TogoOrder { get; set; } = default!;
     }
 }

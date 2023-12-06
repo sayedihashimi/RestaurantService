@@ -1,4 +1,4 @@
-﻿namespace MyRestaurantApi;
+﻿namespace MyRestaurantApi; 
 public class MenuItemOrdered {
     public MenuItemOrdered() { }
     public MenuItemOrdered BuildFromMenuItem(MenuItem item, int togoOrderId) => new MenuItemOrdered {

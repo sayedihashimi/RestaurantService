@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyRestaurantApi.Data;
 
@@ -10,9 +11,11 @@ using MyRestaurantApi.Data;
 namespace MyRestaurantApi.Migrations
 {
     [DbContext(typeof(MyRestaurantApiContext))]
-    partial class MyRestaurantApiContextModelSnapshot : ModelSnapshot
+    [Migration("20230419182535_sqlite_migration_777")]
+    partial class sqlite_migration_777
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -191,63 +194,7 @@ namespace MyRestaurantApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TogoOrderId");
-
                     b.ToTable("MenuItemOrdered");
-                });
-
-            modelBuilder.Entity("MyRestaurantApi.TogoOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("OrderCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("PaymentMethod")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal?>("Subtotal")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("Tax")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("Total")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("TogoOrder");
-                });
-
-            modelBuilder.Entity("MyRestaurantApi.MenuItemOrdered", b =>
-                {
-                    b.HasOne("MyRestaurantApi.TogoOrder", null)
-                        .WithMany("ItemsOrdered")
-                        .HasForeignKey("TogoOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MyRestaurantApi.TogoOrder", b =>
-                {
-                    b.HasOne("MyRestaurantApi.Contact", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("MyRestaurantApi.TogoOrder", b =>
-                {
-                    b.Navigation("ItemsOrdered");
                 });
 #pragma warning restore 612, 618
         }

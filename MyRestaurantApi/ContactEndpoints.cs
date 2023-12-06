@@ -33,11 +33,12 @@ public static class ContactEndpoints
             var affected = await db.Contact
                 .Where(model => model.Id == id)
                 .ExecuteUpdateAsync(setters => setters
-                    .SetProperty(m => m.Id, contact.Id)
-                    .SetProperty(m => m.Name, contact.Name)
-                    .SetProperty(m => m.Email, contact.Email)
-                    .SetProperty(m => m.Phone, contact.Phone)
-                    );
+                  .SetProperty(m => m.Id, contact.Id)
+                  .SetProperty(m => m.Name, contact.Name)
+                  .SetProperty(m => m.Email, contact.Email)
+                  .SetProperty(m => m.Phone, contact.Phone)
+                );
+
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("UpdateContact")
@@ -57,6 +58,7 @@ public static class ContactEndpoints
             var affected = await db.Contact
                 .Where(model => model.Id == id)
                 .ExecuteDeleteAsync();
+
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("DeleteContact")

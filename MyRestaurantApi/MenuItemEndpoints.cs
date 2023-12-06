@@ -33,12 +33,13 @@ public static class MenuItemEndpoints
             var affected = await db.MenuItem
                 .Where(model => model.Id == id)
                 .ExecuteUpdateAsync(setters => setters
-                    .SetProperty(m => m.Id, menuItem.Id)
-                    .SetProperty(m => m.Name, menuItem.Name)
-                    .SetProperty(m => m.Price, menuItem.Price)
-                    .SetProperty(m => m.Description, menuItem.Description)
-                    .SetProperty(m => m.Category, menuItem.Category)
-                    );
+                  .SetProperty(m => m.Id, menuItem.Id)
+                  .SetProperty(m => m.Name, menuItem.Name)
+                  .SetProperty(m => m.Price, menuItem.Price)
+                  .SetProperty(m => m.Description, menuItem.Description)
+                  .SetProperty(m => m.Category, menuItem.Category)
+                );
+
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("UpdateMenuItem")
@@ -58,6 +59,7 @@ public static class MenuItemEndpoints
             var affected = await db.MenuItem
                 .Where(model => model.Id == id)
                 .ExecuteDeleteAsync();
+
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("DeleteMenuItem")

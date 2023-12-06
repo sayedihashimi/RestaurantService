@@ -1,4 +1,4 @@
-﻿namespace MyRestaurantApi;
+﻿namespace MyRestaurantApi; 
 public class MenuItem {
     public int Id { get; set; }
     public string? Name { get; set; }
@@ -6,4 +6,3 @@ public class MenuItem {
     public string? Description { get; set; }
     public MenuItemCategory? Category { get; set; }
 }
-

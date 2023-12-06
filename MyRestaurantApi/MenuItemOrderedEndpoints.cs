@@ -14,7 +14,7 @@ public static class MenuItemOrderedEndpoints
         {
             return await db.MenuItemOrdered.ToListAsync();
         })
-        .WithName("GetAllMenuItemOrdered")
+        .WithName("GetAllMenuItemOrdereds")
         .WithOpenApi();
 
         group.MapGet("/{id}", async Task<Results<Ok<MenuItemOrdered>, NotFound>> (int id, MyRestaurantApiContext db) =>
@@ -33,13 +33,14 @@ public static class MenuItemOrderedEndpoints
             var affected = await db.MenuItemOrdered
                 .Where(model => model.Id == id)
                 .ExecuteUpdateAsync(setters => setters
-                    .SetProperty(m => m.Id, menuItemOrdered.Id)
-                    .SetProperty(m => m.MenuItemId, menuItemOrdered.MenuItemId)
-                    .SetProperty(m => m.TogoOrderId, menuItemOrdered.TogoOrderId)
-                    .SetProperty(m => m.Name, menuItemOrdered.Name)
-                    .SetProperty(m => m.Price, menuItemOrdered.Price)
-                    .SetProperty(m => m.Category, menuItemOrdered.Category)
-                    );
+                  .SetProperty(m => m.Id, menuItemOrdered.Id)
+                  .SetProperty(m => m.MenuItemId, menuItemOrdered.MenuItemId)
+                  .SetProperty(m => m.TogoOrderId, menuItemOrdered.TogoOrderId)
+                  .SetProperty(m => m.Name, menuItemOrdered.Name)
+                  .SetProperty(m => m.Price, menuItemOrdered.Price)
+                  .SetProperty(m => m.Category, menuItemOrdered.Category)
+                );
+
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("UpdateMenuItemOrdered")
@@ -59,6 +60,7 @@ public static class MenuItemOrderedEndpoints
             var affected = await db.MenuItemOrdered
                 .Where(model => model.Id == id)
                 .ExecuteDeleteAsync();
+
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("DeleteMenuItemOrdered")

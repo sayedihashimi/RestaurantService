@@ -35,13 +35,14 @@ public static class TogoOrderEndpoints
             var affected = await db.TogoOrder
                 .Where(model => model.Id == id)
                 .ExecuteUpdateAsync(setters => setters
-                    .SetProperty(m => m.Id, togoOrder.Id)
-                    .SetProperty(m => m.OrderCreated, togoOrder.OrderCreated)
-                    .SetProperty(m => m.Subtotal, togoOrder.Subtotal)
-                    .SetProperty(m => m.Tax, togoOrder.Tax)
-                    .SetProperty(m => m.Total, togoOrder.Total)
-                    .SetProperty(m => m.PaymentMethod, togoOrder.PaymentMethod)
-                    );
+                  .SetProperty(m => m.Id, togoOrder.Id)
+                  .SetProperty(m => m.OrderCreated, togoOrder.OrderCreated)
+                  .SetProperty(m => m.Subtotal, togoOrder.Subtotal)
+                  .SetProperty(m => m.Tax, togoOrder.Tax)
+                  .SetProperty(m => m.Total, togoOrder.Total)
+                  .SetProperty(m => m.PaymentMethod, togoOrder.PaymentMethod)
+                );
+
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("UpdateTogoOrder")
@@ -66,7 +67,6 @@ public static class TogoOrderEndpoints
                     }
                 }
             }
-
             db.TogoOrder.Add(togoOrder);
             await db.SaveChangesAsync();
             return TypedResults.Created($"/api/TogoOrder/{togoOrder.Id}",togoOrder);
@@ -79,6 +79,7 @@ public static class TogoOrderEndpoints
             var affected = await db.TogoOrder
                 .Where(model => model.Id == id)
                 .ExecuteDeleteAsync();
+
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("DeleteTogoOrder")

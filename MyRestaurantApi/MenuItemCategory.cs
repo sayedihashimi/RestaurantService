@@ -1,4 +1,4 @@
-﻿namespace MyRestaurantApi;
+﻿namespace MyRestaurantApi; 
 public enum MenuItemCategory {
     Breakfast = 0,
     Lunch = 1,
