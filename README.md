@@ -1,6 +1,5 @@
 This is a sample ASP.NET Core Web API. Most of the content of the Controllers here was generated with the scaffolding tool in Visual Studio 2022.
 
-
 This repository contains a sample ASP.NET Core Web API project which was built up using the Scaffolding feature in Visual Studio 2022.
 
 To start from scratch to recreate this sample follow the tutorial at https://devblogs.microsoft.com/visualstudio/web-api-development-in-visual-studio-2022/.
@@ -16,7 +15,7 @@ To get started with this project locally follow the steps outlined below.
 ### Update the database
 
 This project uses SQLite as a local database. After cloning you'll need to create the database and apply the migrations that are declared in the code.
-You can use the integrated Entity Framework tools in Visual Studio 2022 to perform this, or you can use the `dotnet ef` commanand line tool.
+You can use the integrated Entity Framework tools in Visual Studio 2022 to perform this, or you can use the `dotnet ef` command line tool.
 
 #### Create the database using the EF tools in Visual Studio
 
@@ -28,8 +27,16 @@ Now click on `Update Database`, see next image.
 
 ![Visual Studio Connected Services Update Database](./media/readme-vs-cs-update-database.png)
 
-After this Visual Studio will create the SQLite database and run the migrations to get the database initalized. You can now run the API project.
+After this Visual Studio will create the SQLite database and run the migrations to get the database initialized. You can now run the API project.
 
 #### Create the database using `dotnet ef`
 
 If you prefer to use the command line you can use the `dotnet ef` tool to take care of that for you. For more info see the docs at https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli#create-your-database-and-schema.
+
+## Additional Resources
+
+- https://learn.microsoft.com/en-us/aspnet/core/test/http-files?view=aspnetcore-8.0
+- https://devblogs.microsoft.com/visualstudio/web-api-development-in-visual-studio-2022/
+- https://devblogs.microsoft.com/visualstudio/safely-use-secrets-in-http-requests-in-visual-studio-2022/
+- https://learn.microsoft.com/en-us/connectors/custom-connectors/port-tunneling
+- https://aka.ms/sayedha/vote
