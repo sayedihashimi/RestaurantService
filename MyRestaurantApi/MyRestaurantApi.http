@@ -3,9 +3,6 @@
 @contactRoute = /api/Contact
 @contentType = application/json
 
-GET https://localhost:123
-
-###
 ###
 Get {{MyRestaurantApi_HostAddress}}{{contactRoute}}
 
@@ -182,13 +179,24 @@ GET {{MyRestaurantApi_HostAddress}}/api/Contact/
 
 ###
 
-POST {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
-
-{
-
-}
-###
-
 POST {{MyRestaurantApi_HostAddress}}/api/MenuItem/
+
+###
+GET https://httpbin.org/headers
+X-1Username: {{$processEnv USERNAME}}
+X-2ApiSecret: {{$processEnv HOMEDRIVE}}
+
+###
+GET https://httpbin.org/headers
+X-1RandomInt: {{$randomInt}}
+X-2DateTime: {{$datetime iso8601}} 
+X-3DateTime: {{$datetime rfc1123}} 
+X-4DateTime: {{$datetime rfc1123 1 d}} 
+X-5DateTime: {{$datetime "dd-MM-yyyy" 1 y}}
+X-6TimeStamp:{{$timestamp}}
+X-7TimeStamp:{{$timestamp 1 y}}
+X-8LocalDateTime: {{$localDatetime rfc1123}}
+X-9LocalDateTime: {{$localDatetime iso8601}}
+X-10LocalDateTime: {{$localDatetime iso8601 1 y}}
 
 ###
