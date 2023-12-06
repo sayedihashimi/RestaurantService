@@ -1,4 +1,5 @@
 ﻿@MyRestaurantApi_HostAddress = https://localhost:7293
+
 @contactRoute = /api/Contact
 @contentType = application/json
 
@@ -35,6 +36,10 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5192/api/MenuItem/
+
+###
+
+Get {{MyRestaurantApi_HostAddress}}/api/Contact/
 
 ###
 GET {{MyRestaurantApi_HostAddress}}/api/MenuItemOrdered
@@ -101,11 +106,13 @@ Content-Type:  application/json
 }
 
 ###
+
 GET {{MyRestaurantApi_HostAddress}}/api/MenuItem/
 
 ###
 
 Get {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+
 ###
 @newmsg = {{Message}}
 PUT https://httpbin.org/anything
@@ -127,7 +134,7 @@ Content-Type: application/json
 
 {
     "content": "content here",
-    "message": {{LocalMessage}}
+    "message": {{Message}}
 }
 ###
 
