@@ -17,6 +17,22 @@ public static class MenuItemEndpoints
         .WithName("GetAllMenuItems")
         .WithOpenApi();
 
+        group.MapGet("/cat/{category}",(MenuItemCategory category, MyRestaurantApiContext db) => {
+            var menuItems = db.MenuItem.AsNoTracking();
+
+            var catValue = (int)category;
+
+
+            var catLower = category.ToString().ToLower();
+
+            return db.MenuItem.Where(item => (int)item.Category! == catValue);
+
+
+			// return menuItems.Select(item => item.Category.Equals(category)).ToList();
+        })
+        .WithName("GetAllMenuItemsByType")
+        .WithOpenApi();
+
         group.MapGet("/{id}", async Task<Results<Ok<MenuItem>, NotFound>> (int id, MyRestaurantApiContext db) =>
         {
             return await db.MenuItem.AsNoTracking()

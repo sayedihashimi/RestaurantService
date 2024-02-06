@@ -15,7 +15,7 @@ namespace MyRestaurantApi.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
 
             modelBuilder.Entity("MyRestaurantApi.Contact", b =>
                 {
@@ -120,7 +120,47 @@ namespace MyRestaurantApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 2000,
+                            Category = 1,
+                            Description = "Enjoy a half portion of crispy fried chicken paired with a fluffy Belgian waffle, dusted with powdered sugar and accompanied by luscious strawberry butter. Complemented with our special sweet and spicy sauce, it's a true culinary delight.",
+                            Name = "Fried Chicken & Waffle",
+                            Price = 16.79m
+                        },
+                        new
+                        {
+                            Id = 2001,
+                            Category = 1,
+                            Description = "Savor our seasoned sirloin steak alongside fluffy scrambled eggs and roasted grape tomatoes, all atop golden hashbrown potatoes and finished with a decadent drizzle of hollandaise sauce.",
+                            Name = "Steak & Scramble Bowl",
+                            Price = 13.79m
+                        },
+                        new
+                        {
+                            Id = 2002,
+                            Category = 1,
+                            Description = "Delight in our distinctive Belgian waffle, adorned with a luscious drizzle of strawberry cream cheese icing, fresh strawberries, delectable cobbler crumble, and a sprinkle of powdered sugar.",
+                            Name = "Strawberry Shortcake Waffle",
+                            Price = 10.49m
+                        },
+                        new
+                        {
+                            Id = 2003,
+                            Category = 1,
+                            Description = "Indulge in our tender country fried steak, smothered in rich homemade sausage gravy, accompanied by two eggs cooked to your preference and your choice of side.",
+                            Name = "Country Fried Steak Breakfast\r\n",
+                            Price = 16.99m
+                        },
+                        new
+                        {
+                            Id = 2004,
+                            Category = 1,
+                            Description = "Savor our tender, lightly fried chicken, enhanced with a zesty pineapple-orange sauce and garnished with fresh scallions. Presented on a bed of seasoned white rice alongside a colorful medley of shredded carrots, red cabbage, corn, green peppers, and onion.",
+                            Name = "Tangy Chicken Bowl",
+                            Price = 10.99m
+                        },
+                        new
+                        {
+                            Id = 2005,
                             Category = 1,
                             Description = "It's a cheese burger without the cheese",
                             Name = "Hamburger",
@@ -128,7 +168,7 @@ namespace MyRestaurantApi.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 2006,
                             Category = 1,
                             Description = "It's a cheese burger without the cheese, with two beef patties",
                             Name = "Hamburger - double",
@@ -136,7 +176,7 @@ namespace MyRestaurantApi.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2007,
                             Category = 1,
                             Description = "A hamburger with cheese",
                             Name = "Cheeseburger",
@@ -144,7 +184,7 @@ namespace MyRestaurantApi.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 2008,
                             Category = 1,
                             Description = "A hamburger with cheese, with two beef patties",
                             Name = "Cheeseburger - double",
@@ -152,7 +192,7 @@ namespace MyRestaurantApi.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 2009,
                             Category = 1,
                             Description = "Mushroom & Swiss burger",
                             Name = "Mushroom & Swiss burger",
@@ -160,11 +200,59 @@ namespace MyRestaurantApi.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 2010,
                             Category = 1,
                             Description = "Mushroom & Swiss burger, with two beef patties",
                             Name = "Mushroom & Swiss burger - double",
                             Price = 6.09m
+                        },
+                        new
+                        {
+                            Id = 2011,
+                            Category = 0,
+                            Description = "Two eggs sunny side up and wheat toast",
+                            Name = "Two eggs and toast",
+                            Price = 6.09m
+                        },
+                        new
+                        {
+                            Id = 2012,
+                            Category = 0,
+                            Description = "Small steak and two eggs",
+                            Name = "Steak and Two eggs",
+                            Price = 10.09m
+                        },
+                        new
+                        {
+                            Id = 3000,
+                            Category = 2,
+                            Description = "Ribeye Steak and mashed potatoes",
+                            Name = "Steak and mashed potatoes",
+                            Price = 15.09m
+                        },
+                        new
+                        {
+                            Id = 3001,
+                            Category = 2,
+                            Description = "Golden beer-battered white fish, fried to perfection, accompanied by tartar sauce, coleslaw, and seasoned fries.",
+                            Name = "Fish and chips",
+                            Price = 14.49m
+                        },
+                        new
+                        {
+                            Id = 3002,
+                            Category = 2,
+                            Description = "Sam's renowned creation: succulent griddle-seared meatloaf smothered in a luscious brown gravy, served alongside velvety mashed potatoes and tender steamed green beans.",
+                            Name = "Sam's famous meatloaf",
+                            Price = 14.49m
+                        },
+                        new
+                        {
+                            Id = 3003,
+                            Category = 2,
+                            Description = "Indulge in Sam's signature dish: tender chicken, carrots, celery, and corn bathed in our velvety cream sauce, all crowned with our unique homemade biscuit crust.",
+                            Name = "Sam's famous Chicken Pot Pie",
+                            Price = 14.49m
                         });
                 });
 

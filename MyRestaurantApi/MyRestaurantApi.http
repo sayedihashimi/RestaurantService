@@ -3,8 +3,11 @@
 @contactRoute = /api/Contact
 @contentType = application/json
 
+@$foo = "bar"
+
 ###
 Get {{MyRestaurantApi_HostAddress}}{{contactRoute}}
+Content-Type222: {{$foo}}
 
 ###
 Get {{MyRestaurantApi_HostAddress}}/api/Contact/3
