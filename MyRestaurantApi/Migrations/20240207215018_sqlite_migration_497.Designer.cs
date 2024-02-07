@@ -11,8 +11,8 @@ using MyRestaurantApi.Data;
 namespace MyRestaurantApi.Migrations
 {
     [DbContext(typeof(MyRestaurantApiContext))]
-    [Migration("20240206185112_sqlite_migration_959")]
-    partial class sqlite_migration_959
+    [Migration("20240207215018_sqlite_migration_497")]
+    partial class sqlite_migration_497
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,6 +123,22 @@ namespace MyRestaurantApi.Migrations
                     b.HasData(
                         new
                         {
+                            Id = 1001,
+                            Category = 0,
+                            Description = "Two eggs sunny side up and wheat toast",
+                            Name = "Two eggs and toast",
+                            Price = 6.09m
+                        },
+                        new
+                        {
+                            Id = 1002,
+                            Category = 0,
+                            Description = "Small steak and two eggs",
+                            Name = "Steak and Two eggs",
+                            Price = 10.09m
+                        },
+                        new
+                        {
                             Id = 2000,
                             Category = 1,
                             Description = "Enjoy a half portion of crispy fried chicken paired with a fluffy Belgian waffle, dusted with powdered sugar and accompanied by luscious strawberry butter. Complemented with our special sweet and spicy sauce, it's a true culinary delight.",
@@ -150,7 +166,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2003,
                             Category = 1,
                             Description = "Indulge in our tender country fried steak, smothered in rich homemade sausage gravy, accompanied by two eggs cooked to your preference and your choice of side.",
-                            Name = "Country Fried Steak Breakfast\r\n",
+                            Name = "Country Fried Steak",
                             Price = 16.99m
                         },
                         new
@@ -208,22 +224,6 @@ namespace MyRestaurantApi.Migrations
                             Description = "Mushroom & Swiss burger, with two beef patties",
                             Name = "Mushroom & Swiss burger - double",
                             Price = 6.09m
-                        },
-                        new
-                        {
-                            Id = 2011,
-                            Category = 0,
-                            Description = "Two eggs sunny side up and wheat toast",
-                            Name = "Two eggs and toast",
-                            Price = 6.09m
-                        },
-                        new
-                        {
-                            Id = 2012,
-                            Category = 0,
-                            Description = "Small steak and two eggs",
-                            Name = "Steak and Two eggs",
-                            Price = 10.09m
                         },
                         new
                         {

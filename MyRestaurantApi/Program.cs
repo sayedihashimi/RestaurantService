@@ -10,16 +10,20 @@ builder.Services.AddDbContext<MyRestaurantApiContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAntiforgery();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
+// uncommenting to see swagger UI page in prod, don't do this unless you are sure you want this.
+/*if (app.Environment.IsDevelopment())*/ {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
+
+app.UseAntiforgery();
 
 app.MapContactEndpoints();
 

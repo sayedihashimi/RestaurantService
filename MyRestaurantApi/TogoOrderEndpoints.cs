@@ -74,7 +74,34 @@ public static class TogoOrderEndpoints
         .WithName("CreateTogoOrder")
         .WithOpenApi();
 
-        group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, MyRestaurantApiContext db) =>
+        // added this just as a sample of getting the forms data to work, not needed otherwise
+		group.MapPost("/form", async ([Microsoft.AspNetCore.Mvc.FromForm]TogoOrder togoOrder, MyRestaurantApiContext db) => {
+			togoOrder.Customer = await db.Contact.FindAsync(togoOrder.Customer!.Id);
+
+			if (togoOrder.OrderCreated == null) {
+				togoOrder.OrderCreated = DateTime.Now;
+			}
+			if (togoOrder.ItemsOrdered != null && togoOrder.ItemsOrdered.Count > 0) {
+				foreach (var item in togoOrder.ItemsOrdered) {
+					var menuItem = await db.MenuItem.FindAsync(item.MenuItemId);
+					item.Name = menuItem!.Name;
+					if (item.Price is null || !item.Price.HasValue || item.Price.Value < 0) {
+						item.Price = menuItem.Price!.Value;
+					}
+					if (item.Category is null || !item.Category.HasValue) {
+						item.Category = menuItem.Category!.Value;
+					}
+				}
+			}
+			db.TogoOrder.Add(togoOrder);
+			await db.SaveChangesAsync();
+			return TypedResults.Created($"/api/TogoOrder/form/{togoOrder.Id}", togoOrder);
+		})
+		.WithName("CreateTogoOrderFromPost")
+        .DisableAntiforgery()   // just for testing, don't add to your actual code unless you are sure about this!
+		.WithOpenApi();
+
+		group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, MyRestaurantApiContext db) =>
         {
             var affected = await db.TogoOrder
                 .Where(model => model.Id == id)

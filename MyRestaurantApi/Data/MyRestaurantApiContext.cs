@@ -26,6 +26,23 @@ namespace MyRestaurantApi.Data
         private MenuItem[] GetSeedDataMenuItems() => new MenuItem[] {
             // breakfast items
             new MenuItem {
+				Id = 1001,
+				Name = "Two eggs and toast",
+				Price = (decimal)6.09,
+				Description = "Two eggs sunny side up and wheat toast",
+				Category = MenuItemCategory.Breakfast
+			},
+			new MenuItem {
+				Id = 1002,
+				Name = "Steak and Two eggs",
+				Price = (decimal)10.09,
+				Description = "Small steak and two eggs",
+				Category = MenuItemCategory.Breakfast
+			},
+
+
+
+			new MenuItem {
 				Id = 2000,
 				Name = "Fried Chicken & Waffle",
 				Price = (decimal)16.79,
@@ -48,7 +65,7 @@ namespace MyRestaurantApi.Data
 			},
 			new MenuItem {
 				Id = 2003,
-				Name = "Country Fried Steak Breakfast\r\n",
+				Name = "Country Fried Steak",
 				Price = (decimal)16.99,
 				Description = "Indulge in our tender country fried steak, smothered in rich homemade sausage gravy, accompanied by two eggs cooked to your preference and your choice of side.",
 				Category = MenuItemCategory.Lunch
@@ -103,20 +120,7 @@ namespace MyRestaurantApi.Data
                 Description = "Mushroom & Swiss burger, with two beef patties",
                 Category = MenuItemCategory.Lunch
             },
-			new MenuItem {
-				Id = 2011,
-				Name = "Two eggs and toast",
-				Price = (decimal)6.09,
-				Description = "Two eggs sunny side up and wheat toast",
-				Category = MenuItemCategory.Breakfast
-			},
-			new MenuItem {
-				Id = 2012,
-				Name = "Steak and Two eggs",
-				Price = (decimal)10.09,
-				Description = "Small steak and two eggs",
-				Category = MenuItemCategory.Breakfast
-			},
+
 
             // dinner items
 
