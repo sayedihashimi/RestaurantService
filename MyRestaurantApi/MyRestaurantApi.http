@@ -3,11 +3,9 @@
 @contactRoute = /api/Contact
 @contentType = application/json
 
-@$foo = "bar"
+@id = 3
 
-###
-Get {{MyRestaurantApi_HostAddress}}{{contactRoute}}
-Content-Type222: {{$foo}}
+GET https://localhost:7293/api/Contact
 
 ###
 Get {{MyRestaurantApi_HostAddress}}/api/Contact/3
@@ -58,7 +56,7 @@ Content-Type: application/json
 {
   "itemsOrdered": [
     {
-      "menuItemId":1
+      "menuItemId":2001
     }
   ],
   "subtotal": 3.50,
@@ -70,30 +68,60 @@ Content-Type: application/json
   }
 }
 ###
+
+Post {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+Content-Type: application/json
+
+{
+  "itemsOrdered": [
+    {
+      "menuItemId":2001
+    },
+    {
+      "menuItemId":2002
+    },
+    {
+      "menuItemId":2003
+    },
+    {
+      "menuItemId":2004
+    }
+  ],
+  "subtotal": 33.50,
+  "tax": 4.8,
+  "total": 38.30,
+  "paymentMethod": 1,
+  "customer": {
+    "id": 3
+  }
+}
+
+###
+
 Post {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
 Content-Type:  application/json
 
 {
   "itemsOrdered": [
     {
-      "menuItemId":1,
+      "menuItemId":1001,
       "price": 1.11,
       "category": 1
     },
     {
-      "menuItemId":2
+      "menuItemId":2002
     },
     {
-      "menuItemId":3
+      "menuItemId":1001
     },
     {
-      "menuItemId":3
+      "menuItemId":2003
     },
     {
-      "menuItemId":4
+      "menuItemId":3001
     },
     {
-      "menuItemId":4
+      "menuItemId":2001
     }
   ],
   "subtotal": 15.99,
@@ -203,3 +231,28 @@ X-9LocalDateTime: {{$localDatetime iso8601}}
 X-10LocalDateTime: {{$localDatetime iso8601 1 y}}
 
 ###
+
+
+GET https://httpbin.org/basic-auth/user/passwd HTTP/1.1
+Authorization: Basic user:passwd
+###
+
+GET https://httpbin.org/basic-auth/user/passwd HTTP/1.1
+Authorization: Basic dXNlcjpwYXNzd2Q=
+###
+
+GET https://httpbin.org/basic-auth/user/passwd HTTP/1.1
+Authorization: Basic user passwd
+Content-Type: text/plain
+
+
+###
+GET https://httpbin.org/anything?foo=b$filter=Id eq 1ar
+
+###
+
+
+
+
+
+

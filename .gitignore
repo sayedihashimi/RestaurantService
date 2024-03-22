@@ -1,4 +1,5 @@
 
+.idea/
 ## ignore sqlite files
 *.db*
 
