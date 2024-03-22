@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MyRestaurantApi.Data;
 using MyRestaurantApi;
+using Microsoft.Extensions.FileProviders;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MyRestaurantApiContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MyRestaurantApiContext") ?? throw new InvalidOperationException("Connection string 'MyRestaurantApiContext' not found.")));
@@ -20,6 +21,8 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
