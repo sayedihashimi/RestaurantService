@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.OpenApi;
 using MyRestaurantApi.Data;
+using Microsoft.OpenApi.Models;
 namespace MyRestaurantApi;
 
 public static class MenuItemOrderedEndpoints
@@ -15,7 +16,9 @@ public static class MenuItemOrderedEndpoints
             return await db.MenuItemOrdered.ToListAsync();
         })
         .WithName("GetAllMenuItemOrdereds")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Gets all menu items ordered."
+		});
 
         group.MapGet("/{id}", async Task<Results<Ok<MenuItemOrdered>, NotFound>> (int id, MyRestaurantApiContext db) =>
         {
@@ -26,7 +29,21 @@ public static class MenuItemOrderedEndpoints
                     : TypedResults.NotFound();
         })
         .WithName("GetMenuItemOrderedById")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Get a menu item by it's Id",
+			Parameters = new List<OpenApiParameter> {
+				new OpenApiParameter {
+					Name = "id",
+					In = ParameterLocation.Path,
+					Required = true,
+					Schema = new OpenApiSchema {
+						Type = "integer",
+						Format = "int32"
+					},
+					Description = "Id of the menu item to get"
+				}
+			}
+		});
 
         group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int id, MenuItemOrdered menuItemOrdered, MyRestaurantApiContext db) =>
         {
@@ -44,7 +61,21 @@ public static class MenuItemOrderedEndpoints
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("UpdateMenuItemOrdered")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Updates a menu item by it's Id",
+			Parameters = new List<OpenApiParameter> {
+				new OpenApiParameter {
+					Name = "id",
+					In = ParameterLocation.Path,
+					Required = true,
+					Schema = new OpenApiSchema {
+						Type = "integer",
+						Format = "int32"
+					},
+					Description = "Id of the menu item to update"
+				}
+			}
+		});
 
         group.MapPost("/", async (MenuItemOrdered menuItemOrdered, MyRestaurantApiContext db) =>
         {
@@ -53,7 +84,9 @@ public static class MenuItemOrderedEndpoints
             return TypedResults.Created($"/api/MenuItemOrdered/{menuItemOrdered.Id}",menuItemOrdered);
         })
         .WithName("CreateMenuItemOrdered")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Creates a new menu item"
+		});
 
         group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, MyRestaurantApiContext db) =>
         {
@@ -64,6 +97,8 @@ public static class MenuItemOrderedEndpoints
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("DeleteMenuItemOrdered")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Deletes the menu item ordered by its Id"
+		});
     }
 }

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.OpenApi;
 using MyRestaurantApi.Data;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 namespace MyRestaurantApi;
 
 public static class MenuItemEndpoints
@@ -15,7 +17,9 @@ public static class MenuItemEndpoints
             return await db.MenuItem.ToListAsync();
         })
         .WithName("GetAllMenuItems")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Gets all Menu Items"
+		});
 
         group.MapGet("/cat/{category}",(MenuItemCategory category, MyRestaurantApiContext db) => {
             var menuItems = db.MenuItem.AsNoTracking();
@@ -26,12 +30,33 @@ public static class MenuItemEndpoints
             var catLower = category.ToString().ToLower();
 
             return db.MenuItem.Where(item => (int)item.Category! == catValue);
-
-
-			// return menuItems.Select(item => item.Category.Equals(category)).ToList();
         })
         .WithName("GetAllMenuItemsByType")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+	        Summary = "Gets all menu items for the given category",
+	        Parameters = new List<OpenApiParameter>
+	        {
+		        new OpenApiParameter
+		        {
+			        Name = "category",
+			        In = ParameterLocation.Path,
+			        Required = true,
+			        Schema = new OpenApiSchema
+			        {
+				        Type = "string",
+				        Enum = new List<IOpenApiAny>
+				        {
+					        new OpenApiString("Breakfast"),
+					        new OpenApiString("Lunch"),
+					        new OpenApiString("Dinner"),
+					        new OpenApiString("Drink"),
+					        new OpenApiString("Side")
+				        }
+			        },
+			        Description = "Category for the items to get. Must be a valid value for MenuItemCategory enum"
+		        }
+	        }
+        });
 
         group.MapGet("/{id}", async Task<Results<Ok<MenuItem>, NotFound>> (int id, MyRestaurantApiContext db) =>
         {
@@ -42,7 +67,21 @@ public static class MenuItemEndpoints
                     : TypedResults.NotFound();
         })
         .WithName("GetMenuItemById")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Get a MenuItem by it's Id",
+			Parameters = new List<OpenApiParameter> {
+				new OpenApiParameter {
+					Name = "id",
+					In = ParameterLocation.Path,
+					Required = true,
+					Schema = new OpenApiSchema {
+						Type = "integer",
+						Format = "int32"
+					},
+					Description = "Id of the MenuItem to get"
+				}
+			}
+		});
 
         group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int id, MenuItem menuItem, MyRestaurantApiContext db) =>
         {
@@ -59,7 +98,24 @@ public static class MenuItemEndpoints
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("UpdateMenuItem")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Update a MenuItem by its id",
+			Parameters = new List<OpenApiParameter>
+	        {
+		        new OpenApiParameter
+		        {
+			        Name = "id",
+			        In = ParameterLocation.Path,
+			        Required = true,
+			        Schema = new OpenApiSchema
+			        {
+				        Type = "integer",
+				        Format = "int32"
+			        },
+			        Description = "Id of the MenuItem to update"
+		        }
+	        }
+		});
 
         group.MapPost("/", async (MenuItem menuItem, MyRestaurantApiContext db) =>
         {
@@ -68,17 +124,36 @@ public static class MenuItemEndpoints
             return TypedResults.Created($"/api/MenuItem/{menuItem.Id}",menuItem);
         })
         .WithName("CreateMenuItem")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Creates a new MenuItem"
+		});
 
-        group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, MyRestaurantApiContext db) =>
-        {
-            var affected = await db.MenuItem
-                .Where(model => model.Id == id)
-                .ExecuteDeleteAsync();
+		group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, MyRestaurantApiContext db) =>
+		{
+			var affected = await db.MenuItem
+				.Where(model => model.Id == id)
+				.ExecuteDeleteAsync();
 
-            return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
-        })
-        .WithName("DeleteMenuItem")
-        .WithOpenApi();
+			return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
+		})
+		.WithName("DeleteMenuItem")
+		.WithOpenApi(operation => new(operation) {
+			Summary = "Deletes a MenuItem by its Id",
+			Parameters = new List<OpenApiParameter>
+			{
+				new OpenApiParameter
+				{
+					Name = "id",
+					In = ParameterLocation.Path,
+					Required = true,
+					Schema = new OpenApiSchema
+					{
+						Type = "integer",
+						Format = "int32"
+					},
+					Description = "Id of the MenuItem to delete"
+				}
+			}
+		});
     }
 }

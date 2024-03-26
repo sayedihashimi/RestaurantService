@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.OpenApi;
 using MyRestaurantApi.Data;
+using Microsoft.OpenApi.Models;
 namespace MyRestaurantApi;
 
 public static class TogoOrderEndpoints
@@ -17,7 +18,9 @@ public static class TogoOrderEndpoints
                 .ToListAsync();
         })
         .WithName("GetAllTogoOrders")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) { 
+            Summary = "Creates a new togo order" 
+        });
 
         group.MapGet("/{id}", async Task<Results<Ok<TogoOrder>, NotFound>> (int id, MyRestaurantApiContext db) =>
         {
@@ -28,7 +31,21 @@ public static class TogoOrderEndpoints
                     : TypedResults.NotFound();
         })
         .WithName("GetTogoOrderById")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Get a togo order by it's Id",
+			Parameters = new List<OpenApiParameter> {
+				new OpenApiParameter {
+					Name = "id",
+					In = ParameterLocation.Path,
+					Required = true,
+					Schema = new OpenApiSchema {
+						Type = "integer",
+						Format = "int32"
+					},
+					Description = "Id of the togo order to get"
+				}
+			}
+		});
 
         group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int id, TogoOrder togoOrder, MyRestaurantApiContext db) =>
         {
@@ -46,7 +63,21 @@ public static class TogoOrderEndpoints
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("UpdateTogoOrder")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Updates the togo order by it's Id",
+			Parameters = new List<OpenApiParameter> {
+				new OpenApiParameter {
+					Name = "id",
+					In = ParameterLocation.Path,
+					Required = true,
+					Schema = new OpenApiSchema {
+						Type = "integer",
+						Format = "int32"
+					},
+					Description = "Id of the togo order to update"
+				}
+			}
+		});
 
         group.MapPost("/", async (TogoOrder togoOrder, MyRestaurantApiContext db) =>
         {
@@ -72,7 +103,9 @@ public static class TogoOrderEndpoints
             return TypedResults.Created($"/api/TogoOrder/{togoOrder.Id}",togoOrder);
         })
         .WithName("CreateTogoOrder")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) {
+			Summary = "Creates a new togo order"
+		});
 
         // added this just as a sample of getting the forms data to work, not needed otherwise
 		group.MapPost("/form", async ([Microsoft.AspNetCore.Mvc.FromForm]TogoOrder togoOrder, MyRestaurantApiContext db) => {
@@ -99,7 +132,9 @@ public static class TogoOrderEndpoints
 		})
 		.WithName("CreateTogoOrderFromPost")
         .DisableAntiforgery()   // just for testing, don't add to your actual code unless you are sure about this!
-		.WithOpenApi();
+		.WithOpenApi(operation => new(operation) {
+			Summary = "Endpoint to update the togo order using a form"
+		});
 
 		group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, MyRestaurantApiContext db) =>
         {
@@ -110,6 +145,8 @@ public static class TogoOrderEndpoints
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("DeleteTogoOrder")
-        .WithOpenApi();
+        .WithOpenApi(operation => new(operation) { 
+            Summary = "Deletes the togo order with the given Id" 
+        });
     }
 }
