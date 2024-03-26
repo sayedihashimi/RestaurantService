@@ -14,7 +14,9 @@ window.onload = function () {
             SwaggerUIBundle.plugins.DownloadUrl
         ],
         layout: "StandaloneLayout",
-        filter: "true"
+        filter: "true",
+        tryItOutEnabled: "true",
+        requestSnippetsEnabled: "true",
     });
 
     //</editor-fold>
