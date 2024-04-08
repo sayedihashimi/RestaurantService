@@ -1,3 +1,4 @@
-﻿# For more info on HTTP files go to https://aka.ms/vs/httpfile
+﻿@MyRestaurantApi_HostAddress = https://localhost:7293
 
-@MyRestaurantApi_HostAddress = https://localhost:7293
+GET {{MyRestaurantApi_HostAddress}}/api/Contact
+###
