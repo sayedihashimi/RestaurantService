@@ -9,7 +9,8 @@ GET https://localhost:7293/api/Contact
 
 ###
 Get {{MyRestaurantApi_HostAddress}}/api/Contact/3
-
+###
+@id = 4
 ###
 PUT {{MyRestaurantApi_HostAddress}}/api/Contact/3
 Content-Type: {{contentType}}
@@ -254,3 +255,11 @@ GET https://httpbin.org/anything?foo=b$filter=Id eq 1ar
 POST {{MyRestaurantApi_HostAddress}}/api/Contact/
 
 ###
+GET https://biggamesapi.io/api/collections
+###
+GET https://biggamesapi.io/api/collections/Pets
+###
+GET https://biggamesapi.io/api/collection/Pets
+###
+
+# curl --location 'https://biggamesapi.io/api/collection/Pets'
