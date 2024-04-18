@@ -83,10 +83,9 @@ public static class TogoOrderEndpoints
         {
             togoOrder.Customer = await db.Contact.FindAsync(togoOrder.Customer!.Id);
 
-            if (togoOrder.OrderCreated == null) {
-                togoOrder.OrderCreated = DateTime.Now;
-            }
-            if (togoOrder.ItemsOrdered != null && togoOrder.ItemsOrdered.Count > 0) {
+			togoOrder.OrderCreated ??= DateTime.Now;
+
+			if (togoOrder.ItemsOrdered?.Count == 0) {
                 foreach (var item in togoOrder.ItemsOrdered) {
                     var menuItem = await db.MenuItem.FindAsync(item.MenuItemId);
                     item.Name = menuItem!.Name;
@@ -98,6 +97,7 @@ public static class TogoOrderEndpoints
                     }
                 }
             }
+
             db.TogoOrder.Add(togoOrder);
             await db.SaveChangesAsync();
             return TypedResults.Created($"/api/TogoOrder/{togoOrder.Id}",togoOrder);
