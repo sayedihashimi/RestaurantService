@@ -2,3 +2,30 @@
 
 GET {{MyRestaurantApi_HostAddress}}/api/Contact
 ###
+# @name createContact
+POST {{MyRestaurantApi_HostAddress}}/api/Contact
+Content-Type: application/json
+
+{
+  "name": "Demo User",
+  "email": "demo@example.com",
+  "phone": "555-222-5555"
+}
+
+###
+
+# get the user we just created
+GET {{MyRestaurantApi_HostAddress}}/api/Contact/{{createContact.response.body.$.id}}
+
+###
+
+# update the phone number
+PUT {{MyRestaurantApi_HostAddress}}/api/Contact/{{createContact.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "phone": "555-555-5555"
+}
+
+###
+

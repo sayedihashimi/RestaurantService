@@ -50,7 +50,7 @@ public static class ContactEndpoints
             var affected = await db.Contact
                 .Where(model => model.Id == id)
                 .ExecuteUpdateAsync(setters => setters
-                  .SetProperty(m => m.Id, contact.Id)
+                  .SetProperty(m => m.Id, id)
                   .SetProperty(m => m.Email, e => !string.IsNullOrEmpty(contact.Email) ? contact.Email : e.Email)
                   .SetProperty(m => m.Phone, e => !string.IsNullOrEmpty(contact.Phone) ? contact.Phone : e.Phone)
                   .SetProperty(m=>m.Name, e=> !string.IsNullOrEmpty(contact.Name) ? contact.Name : e.Name)

@@ -1,0 +1,41 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+# curl --location 'https://postman-echo.com/digest-auth' 
+# --header 'Authorization: Digest username="postman", realm="Users", nonce="ni1LiL0O37PRRhofWdCLmwFsnEtH1lew", uri="/digest-auth", response="254679099562cf07df9b6f5d8d15db44", opaque=""'
+
+
+
+GET https://postman-echo.com/digest-auth
+Authorization: Digest username="postman", realm="Users", nonce="ni1LiL0O37PRRhofWdCLmwFsnEtH1lew", uri="/digest-auth", response="254679099562cf07df9b6f5d8d15db44", opaque=""
+
+###
+@basicAuthUrl = https://sayedhabasicauth.azurewebsites.net/
+
+POST https://localhost:56133/users/authenticate
+Content-Type: application/json
+
+{
+    "username":"test",
+    "password":"test"
+}
+
+###
+
+POST {{basicAuthUrl}}/users/authenticate
+Content-Type: application/json
+
+{
+    "username":"test",
+    "password":"test"
+}
+
+###
+GET https://user:passwd@httpbin.org/digest-auth/auth/user/passwd
+###
+GET https://httpbin.org/digest-auth
+WWW-Authenticate: Digest realm="me@kennethreitz.com", nonce="7176875cd04ff2cc82622f823844f96d", qop="auth", opaque="5ce8e41e0fb14cfa0df07e27832160dc", algorithm=MD5, stale=FALSE
+
+###
+curl -v --digest -u 'user:password' 'https://httpbin.org/digest-auth/auth/user/password' -H "Accept: application/json"
+
+###
+
