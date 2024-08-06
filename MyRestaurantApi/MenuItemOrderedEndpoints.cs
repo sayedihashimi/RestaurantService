@@ -45,7 +45,19 @@ public static class MenuItemOrderedEndpoints
 			}
 		});
 
-        group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int id, MenuItemOrdered menuItemOrdered, MyRestaurantApiContext db) =>
+		group.MapGet("/togoorder/{togoOrderId}", async Task<Results<Ok<List<MenuItemOrdered>>, NotFound>> (int togoOrderId, MyRestaurantApiContext db) => {
+			var items = await db.MenuItemOrdered.AsNoTracking()
+				.Where(item => item.TogoOrderId == togoOrderId)
+				.ToListAsync();
+
+			return items.Any()
+				? TypedResults.Ok(items)
+				: TypedResults.NotFound();
+		})
+        .WithName("GetMenuItemOrderedByTogoOrderId");
+
+
+		group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int id, MenuItemOrdered menuItemOrdered, MyRestaurantApiContext db) =>
         {
             var affected = await db.MenuItemOrdered
                 .Where(model => model.Id == id)

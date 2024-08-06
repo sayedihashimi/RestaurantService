@@ -1,1 +1,119 @@
 # For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+#@MyRestaurantApi_HostAddress = https://localhost:7293
+
+GET {{MyRestaurantApi_HostAddress}}/api/Contact
+###
+# @name createContact
+POST {{MyRestaurantApi_HostAddress}}/api/Contact
+Content-Type: application/json
+
+{
+  "name": "VSLive User",
+  "email": "vslive2024@example.com",
+  "phone": "404-123-7890"
+}
+
+###
+
+# get the user we just created
+GET {{MyRestaurantApi_HostAddress}}/api/Contact/{{createContact.response.body.$.id}}
+
+###
+
+# update the phone number
+PUT {{MyRestaurantApi_HostAddress}}/api/Contact/{{createContact.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "phone": "555-555-5555"
+}
+
+###
+
+# get the user again to verify phone was updated
+GET {{MyRestaurantApi_HostAddress}}/api/Contact/{{createContact.response.body.$.id}}
+
+###
+
+# get menu items to display menu
+GET http://localhost:5192/api/MenuItem/
+###
+
+# make an order
+# @name createTogoOrder
+POST {{MyRestaurantApi_HostAddress}}/api/TogoOrder/
+Content-Type: application/json
+
+{
+  "itemsOrdered": [
+    {
+      "menuItemId":2008
+    },
+    {
+        "menuItemId":3003
+    }
+  ],
+  "subtotal": 19.58,
+  "tax": 1.37,
+  "total": 20.95,
+  "paymentMethod": 1,
+  "customer": {
+    "id": {{createContact.response.body.$.id}}
+  }
+}
+###
+
+# get the items that were just ordered
+GET {{MyRestaurantApi_HostAddress}}/api/MenuItemOrdered/togoorder/{{createTogoOrder.response.body.$.id}}
+
+###
+
+GET https://myrestaurantapi20240806012442.azurewebsites.net/api/Contact
+
+###
+
+GET https://httpbin.org/headers
+X-Message: {{Message}}
+X-CustomSecret: {{secretFromEncrypted}}
+
+###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -85,7 +85,7 @@ public static class TogoOrderEndpoints
 
 			togoOrder.OrderCreated ??= DateTime.Now;
 
-			if (togoOrder.ItemsOrdered?.Count == 0) {
+			if (togoOrder.ItemsOrdered?.Count > 0) {
                 foreach (var item in togoOrder.ItemsOrdered) {
                     var menuItem = await db.MenuItem.FindAsync(item.MenuItemId);
                     item.Name = menuItem!.Name;
