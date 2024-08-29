@@ -15,6 +15,9 @@ builder.Services.AddAntiforgery();
 
 var app = builder.Build();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 // Configure the HTTP request pipeline.
 // uncommenting to see swagger UI page in prod, don't do this unless you are sure you want this.
 /*if (app.Environment.IsDevelopment())*/ {
@@ -36,6 +39,7 @@ app.MapMenuItemOrderedEndpoints();
 
 app.MapTogoOrderEndpoints();
 
+app.MapFallbackToFile("/index.html");
 
 app.Run();
 
