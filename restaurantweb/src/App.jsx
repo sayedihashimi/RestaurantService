@@ -4,9 +4,9 @@ import './App.css';
 import Menu from './components/Menu';
 
 function App() {
-    const [menuItems, setForecasts] = useState();
+    const [menuItems, setMenuItems] = useState();
     useEffect(() => {
-        populateWeatherData();
+        populateMenuItems();
     }, []);
 
     return (
@@ -20,10 +20,10 @@ function App() {
         </div>
     );
 
-    async function populateWeatherData() {
+    async function populateMenuItems() {
         const response = await fetch('api/menuitem');
         const data = await response.json();
-        setForecasts(data);
+        setMenuItems(data);
     }
 }
 export default App;
