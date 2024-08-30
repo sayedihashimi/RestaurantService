@@ -10,16 +10,19 @@ function App() {
         : <table className="table table-striped" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Price</th>
                 </tr>
             </thead>
             <tbody>
                 {forecasts.map(forecast =>
                     <tr key={forecast.id}>
                         <td>{forecast.name}</td>
+                        <td>{forecast.description}</td>
+                        <td>{forecast.category}</td>
+                        <td>{forecast.price}</td>
                     </tr>
                 )}
             </tbody>
@@ -33,7 +36,7 @@ function App() {
     );
 
     async function populateWeatherData() {
-        const response = await fetch('api/contact');
+        const response = await fetch('api/menuitem');
         const data = await response.json();
         setForecasts(data);
     }

@@ -37,7 +37,7 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '^/api/contact': {
+            '^/api/*': {
                 target,
                 secure: false
             }
