@@ -107,6 +107,9 @@ namespace MyRestaurantApi.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("EmojiName")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -123,6 +126,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 1001,
                             Category = 0,
                             Description = "Two eggs sunny side up and wheat toast",
+                            EmojiName = "🍳🍳🍞",
                             Name = "Two eggs and toast",
                             Price = 6.09m
                         },
@@ -131,6 +135,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 1002,
                             Category = 0,
                             Description = "Small steak and two eggs",
+                            EmojiName = "🥩🍳🍳",
                             Name = "Steak and Two eggs",
                             Price = 10.09m
                         },
@@ -139,6 +144,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2000,
                             Category = 1,
                             Description = "Enjoy a half portion of crispy fried chicken paired with a fluffy Belgian waffle, dusted with powdered sugar and accompanied by luscious strawberry butter. Complemented with our special sweet and spicy sauce, it's a true culinary delight.",
+                            EmojiName = "🍗🧇",
                             Name = "Fried Chicken & Waffle",
                             Price = 16.79m
                         },
@@ -147,6 +153,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2001,
                             Category = 1,
                             Description = "Savor our seasoned sirloin steak alongside fluffy scrambled eggs and roasted grape tomatoes, all atop golden hashbrown potatoes and finished with a decadent drizzle of hollandaise sauce.",
+                            EmojiName = "🥩🍳🍅🥔",
                             Name = "Steak & Scramble Bowl",
                             Price = 13.79m
                         },
@@ -155,6 +162,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2002,
                             Category = 1,
                             Description = "Delight in our distinctive Belgian waffle, adorned with a luscious drizzle of strawberry cream cheese icing, fresh strawberries, delectable cobbler crumble, and a sprinkle of powdered sugar.",
+                            EmojiName = "🍓🍰🧇",
                             Name = "Strawberry Shortcake Waffle",
                             Price = 10.49m
                         },
@@ -163,6 +171,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2003,
                             Category = 1,
                             Description = "Indulge in our tender country fried steak, smothered in rich homemade sausage gravy, accompanied by two eggs cooked to your preference and your choice of side.",
+                            EmojiName = "🥩🍳🍳",
                             Name = "Country Fried Steak",
                             Price = 16.99m
                         },
@@ -171,6 +180,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2004,
                             Category = 1,
                             Description = "Savor our tender, lightly fried chicken, enhanced with a zesty pineapple-orange sauce and garnished with fresh scallions. Presented on a bed of seasoned white rice alongside a colorful medley of shredded carrots, red cabbage, corn, green peppers, and onion.",
+                            EmojiName = "🍗🍍🍚",
                             Name = "Tangy Chicken Bowl",
                             Price = 10.99m
                         },
@@ -179,6 +189,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2005,
                             Category = 1,
                             Description = "It's a cheese burger without the cheese",
+                            EmojiName = "🍔",
                             Name = "Hamburger",
                             Price = 3.68m
                         },
@@ -187,6 +198,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2006,
                             Category = 1,
                             Description = "It's a cheese burger without the cheese, with two beef patties",
+                            EmojiName = "🍔🍔",
                             Name = "Hamburger - double",
                             Price = 5.7m
                         },
@@ -195,6 +207,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2007,
                             Category = 1,
                             Description = "A hamburger with cheese",
+                            EmojiName = "🍔🧀",
                             Name = "Cheeseburger",
                             Price = 4.09m
                         },
@@ -203,6 +216,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2008,
                             Category = 1,
                             Description = "A hamburger with cheese, with two beef patties",
+                            EmojiName = "🍔🍔🧀",
                             Name = "Cheeseburger - double",
                             Price = 5.09m
                         },
@@ -211,6 +225,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2009,
                             Category = 1,
                             Description = "Mushroom & Swiss burger",
+                            EmojiName = "🍔🍄🧀",
                             Name = "Mushroom & Swiss burger",
                             Price = 4.59m
                         },
@@ -219,6 +234,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 2010,
                             Category = 1,
                             Description = "Mushroom & Swiss burger, with two beef patties",
+                            EmojiName = "🍔🍔🍄🧀",
                             Name = "Mushroom & Swiss burger - double",
                             Price = 6.09m
                         },
@@ -227,6 +243,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 3000,
                             Category = 2,
                             Description = "Ribeye Steak and mashed potatoes",
+                            EmojiName = "🥩🥔",
                             Name = "Steak and mashed potatoes",
                             Price = 15.09m
                         },
@@ -235,6 +252,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 3001,
                             Category = 2,
                             Description = "Golden beer-battered white fish, fried to perfection, accompanied by tartar sauce, coleslaw, and seasoned fries.",
+                            EmojiName = "🐟🍟",
                             Name = "Fish and chips",
                             Price = 14.49m
                         },
@@ -243,6 +261,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 3002,
                             Category = 2,
                             Description = "Sam's renowned creation: succulent griddle-seared meatloaf smothered in a luscious brown gravy, served alongside velvety mashed potatoes and tender steamed green beans.",
+                            EmojiName = "🍖🍞",
                             Name = "Sam's famous meatloaf",
                             Price = 14.49m
                         },
@@ -251,6 +270,7 @@ namespace MyRestaurantApi.Migrations
                             Id = 3003,
                             Category = 2,
                             Description = "Indulge in Sam's signature dish: tender chicken, carrots, celery, and corn bathed in our velvety cream sauce, all crowned with our unique homemade biscuit crust.",
+                            EmojiName = "🍗🥧",
                             Name = "Sam's famous Chicken Pot Pie",
                             Price = 14.49m
                         });
