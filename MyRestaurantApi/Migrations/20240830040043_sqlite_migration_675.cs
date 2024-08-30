@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyRestaurantApi.Migrations
 {
     /// <inheritdoc />
-    public partial class sqlite_migration_497 : Migration
+    public partial class sqlite_migration_675 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,6 +35,7 @@ namespace MyRestaurantApi.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
+                    EmojiName = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<decimal>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Category = table.Column<int>(type: "INTEGER", nullable: true)
@@ -107,26 +108,26 @@ namespace MyRestaurantApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "MenuItem",
-                columns: new[] { "Id", "Category", "Description", "Name", "Price" },
+                columns: new[] { "Id", "Category", "Description", "EmojiName", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1001, 0, "Two eggs sunny side up and wheat toast", "Two eggs and toast", 6.09m },
-                    { 1002, 0, "Small steak and two eggs", "Steak and Two eggs", 10.09m },
-                    { 2000, 1, "Enjoy a half portion of crispy fried chicken paired with a fluffy Belgian waffle, dusted with powdered sugar and accompanied by luscious strawberry butter. Complemented with our special sweet and spicy sauce, it's a true culinary delight.", "Fried Chicken & Waffle", 16.79m },
-                    { 2001, 1, "Savor our seasoned sirloin steak alongside fluffy scrambled eggs and roasted grape tomatoes, all atop golden hashbrown potatoes and finished with a decadent drizzle of hollandaise sauce.", "Steak & Scramble Bowl", 13.79m },
-                    { 2002, 1, "Delight in our distinctive Belgian waffle, adorned with a luscious drizzle of strawberry cream cheese icing, fresh strawberries, delectable cobbler crumble, and a sprinkle of powdered sugar.", "Strawberry Shortcake Waffle", 10.49m },
-                    { 2003, 1, "Indulge in our tender country fried steak, smothered in rich homemade sausage gravy, accompanied by two eggs cooked to your preference and your choice of side.", "Country Fried Steak", 16.99m },
-                    { 2004, 1, "Savor our tender, lightly fried chicken, enhanced with a zesty pineapple-orange sauce and garnished with fresh scallions. Presented on a bed of seasoned white rice alongside a colorful medley of shredded carrots, red cabbage, corn, green peppers, and onion.", "Tangy Chicken Bowl", 10.99m },
-                    { 2005, 1, "It's a cheese burger without the cheese", "Hamburger", 3.68m },
-                    { 2006, 1, "It's a cheese burger without the cheese, with two beef patties", "Hamburger - double", 5.7m },
-                    { 2007, 1, "A hamburger with cheese", "Cheeseburger", 4.09m },
-                    { 2008, 1, "A hamburger with cheese, with two beef patties", "Cheeseburger - double", 5.09m },
-                    { 2009, 1, "Mushroom & Swiss burger", "Mushroom & Swiss burger", 4.59m },
-                    { 2010, 1, "Mushroom & Swiss burger, with two beef patties", "Mushroom & Swiss burger - double", 6.09m },
-                    { 3000, 2, "Ribeye Steak and mashed potatoes", "Steak and mashed potatoes", 15.09m },
-                    { 3001, 2, "Golden beer-battered white fish, fried to perfection, accompanied by tartar sauce, coleslaw, and seasoned fries.", "Fish and chips", 14.49m },
-                    { 3002, 2, "Sam's renowned creation: succulent griddle-seared meatloaf smothered in a luscious brown gravy, served alongside velvety mashed potatoes and tender steamed green beans.", "Sam's famous meatloaf", 14.49m },
-                    { 3003, 2, "Indulge in Sam's signature dish: tender chicken, carrots, celery, and corn bathed in our velvety cream sauce, all crowned with our unique homemade biscuit crust.", "Sam's famous Chicken Pot Pie", 14.49m }
+                    { 1001, 0, "Two eggs sunny side up and wheat toast", "🍳🍳🍞", "Two eggs and toast", 6.09m },
+                    { 1002, 0, "Small steak and two eggs", "🥩🍳🍳", "Steak and Two eggs", 10.09m },
+                    { 2000, 1, "Enjoy a half portion of crispy fried chicken paired with a fluffy Belgian waffle, dusted with powdered sugar and accompanied by luscious strawberry butter. Complemented with our special sweet and spicy sauce, it's a true culinary delight.", "🍗🧇", "Fried Chicken & Waffle", 16.79m },
+                    { 2001, 1, "Savor our seasoned sirloin steak alongside fluffy scrambled eggs and roasted grape tomatoes, all atop golden hashbrown potatoes and finished with a decadent drizzle of hollandaise sauce.", "🥩🍳🍅🥔", "Steak & Scramble Bowl", 13.79m },
+                    { 2002, 1, "Delight in our distinctive Belgian waffle, adorned with a luscious drizzle of strawberry cream cheese icing, fresh strawberries, delectable cobbler crumble, and a sprinkle of powdered sugar.", "🍓🍰🧇", "Strawberry Shortcake Waffle", 10.49m },
+                    { 2003, 1, "Indulge in our tender country fried steak, smothered in rich homemade sausage gravy, accompanied by two eggs cooked to your preference and your choice of side.", "🥩🍳🍳", "Country Fried Steak", 16.99m },
+                    { 2004, 1, "Savor our tender, lightly fried chicken, enhanced with a zesty pineapple-orange sauce and garnished with fresh scallions. Presented on a bed of seasoned white rice alongside a colorful medley of shredded carrots, red cabbage, corn, green peppers, and onion.", "🍗🍍🍚", "Tangy Chicken Bowl", 10.99m },
+                    { 2005, 1, "It's a cheese burger without the cheese", "🍔", "Hamburger", 3.68m },
+                    { 2006, 1, "It's a cheese burger without the cheese, with two beef patties", "🍔🍔", "Hamburger - double", 5.7m },
+                    { 2007, 1, "A hamburger with cheese", "🍔🧀", "Cheeseburger", 4.09m },
+                    { 2008, 1, "A hamburger with cheese, with two beef patties", "🍔🍔🧀", "Cheeseburger - double", 5.09m },
+                    { 2009, 1, "Mushroom & Swiss burger", "🍔🍄🧀", "Mushroom & Swiss burger", 4.59m },
+                    { 2010, 1, "Mushroom & Swiss burger, with two beef patties", "🍔🍔🍄🧀", "Mushroom & Swiss burger - double", 6.09m },
+                    { 3000, 2, "Ribeye Steak and mashed potatoes", "🥩🥔", "Steak and mashed potatoes", 15.09m },
+                    { 3001, 2, "Golden beer-battered white fish, fried to perfection, accompanied by tartar sauce, coleslaw, and seasoned fries.", "🐟🍟", "Fish and chips", 14.49m },
+                    { 3002, 2, "Sam's renowned creation: succulent griddle-seared meatloaf smothered in a luscious brown gravy, served alongside velvety mashed potatoes and tender steamed green beans.", "🍖🍞", "Sam's famous meatloaf", 14.49m },
+                    { 3003, 2, "Indulge in Sam's signature dish: tender chicken, carrots, celery, and corn bathed in our velvety cream sauce, all crowned with our unique homemade biscuit crust.", "🍗🥧", "Sam's famous Chicken Pot Pie", 14.49m }
                 });
 
             migrationBuilder.CreateIndex(
