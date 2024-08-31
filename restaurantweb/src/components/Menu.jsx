@@ -7,7 +7,7 @@ function Menu({ items }) {
     return (
         <div className="menu-grid">
             {items.map(item => (
-                <MenuItem key={item.id} {...item} />
+                <MenuItem key={item.id} menuItem={item} />
             ))}
         </div>
     );
