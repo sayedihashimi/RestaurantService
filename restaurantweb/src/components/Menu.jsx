@@ -21,7 +21,7 @@ Menu.propTypes = {
             emojiName: PropTypes.string,
             price: PropTypes.number,
             description: PropTypes.string,
-            category: PropTypes.int,
+            category: PropTypes.number,
         })
     ).isRequired,
 };
