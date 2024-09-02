@@ -1,15 +1,15 @@
 /* Menu.css */
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 16px;
     padding: 16px;
 }
 
 .menu-item {
     border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 2rem;
+    padding: .5rem;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
@@ -25,5 +25,8 @@
     }
 
     .menu-item p {
-        margin: 8px 0;
+        margin: 5px 0;
     }
+.emoji{
+    font-size: 2rem;
+}

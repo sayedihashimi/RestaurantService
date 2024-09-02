@@ -11,11 +11,10 @@ function App() {
     return (
         <div>
             <h1>Menu Items</h1>
-            {menuItems === undefined ? (
-                <p><em>Loading... Waiting for backend to start, try again soon.</em></p>
-            ) : (
-                <Menu items={menuItems} />
-            )}
+            {menuItems === undefined ?
+                (<p><em>Loading... Waiting for backend to start, try again soon.</em></p>) :
+                (<Menu items={menuItems} />)
+            }
         </div>
     );
 

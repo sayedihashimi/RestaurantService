@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import { PrimaryButton } from '@fluentui/react';
 function MenuItem({ menuItem, truncate = true }) {
     const { id, name, emojiName, price, description, category } = menuItem;
     const [truncateDescription, setTruncateDescription] = useState(truncate);
@@ -11,12 +11,12 @@ function MenuItem({ menuItem, truncate = true }) {
     return (
         <div className="menu-item" id={id} data-menu-category={category}>
             <h2>{name}</h2>
-            <h3>{emojiName}</h3>
+            <h3 className="emoji">{emojiName}</h3>
             <p>{desc}</p>
             <p>Price: ${price?.toFixed(2)}</p>
-            <button onClick={() => setTruncateDescription((previous) => !previous)} hidden={(description.length <= truncateLength)}>
+            <PrimaryButton onClick={() => setTruncateDescription((previous) => !previous)} hidden={(description.length < truncateLength)}>
                 {truncateDescription ? 'More' : 'Less'}
-            </button>
+            </PrimaryButton>
         </div>
     );
 }
