@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import MenuItem from './MenuItem';
 import './Menu.css';
+import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 
 function Menu() {
     const [menuItems, setMenuItems] = useState();
@@ -8,10 +9,18 @@ function Menu() {
         populateMenuItems();
     }, []);
 
+    const spinnerStyles = {
+        label: {
+            fontSize: '2rem',
+        },
+    };
+
     return (
         <div id="menuContainer">
         { !menuItems ?
-            (<p><em>Loading... Waiting for backend to start, try again soon.</em></p>) :
+            (<div>
+                    <Spinner label="I am definitely loading..." size={SpinnerSize.large} styles={spinnerStyles} />
+            </div>) :
             (
                 <div className="menu-grid">
                     {menuItems.map(item => (

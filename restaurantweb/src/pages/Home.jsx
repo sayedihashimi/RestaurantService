@@ -1,5 +1,5 @@
-import logo from '../../public/the-cozy-plate-logo.svg';
-import interior from '../../public/restaurant-interior-01.webp';
+import logo from '/the-cozy-plate-logo.svg';
+import interior from '/restaurant-interior-01.webp';
 import './Home.css'
 
 function Home() {
