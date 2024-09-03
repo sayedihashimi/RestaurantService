@@ -1,5 +1,14 @@
+:root {
+    --primary-green: hsl(105, 25%, 32%); /* Earthy Green */
+    --secondary-beige: hsl(42, 69%, 87%); /* Warm Beige */
+    --accent-terracotta: hsl(14, 42%, 49%); /* Deep Terracotta */
+    --neutral-gray: hsl(0, 0%, 88%); /* Light Gray */
+    --text-charcoal: hsl(0, 0%, 20%); /* Dark Charcoal */
+    --highlight-yellow: hsl(43, 82%, 66%); /* Soft Yellow */
+}
+
 body {
-    background-color: hsl(111, 25%, 32%)
+    background-color: var(--primary-green);
 }
 #root {
   margin: 0 auto;
@@ -7,7 +16,6 @@ body {
   text-align: center;
   width:100%;  
   padding-top: 4rem; /* to give space for the header  */
-  
 }
 *[hidden]{
     display:none;

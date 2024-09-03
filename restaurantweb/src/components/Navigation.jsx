@@ -40,12 +40,12 @@ function Navigation() {
             onClick: () => console.log('Tiles'),
         },
         {
-            key: 'info',
-            text: 'Info',
-            ariaLabel: 'Info',
+            key: 'shoppingCart',
+            text: 'Shopping Cart',
+            ariaLabel: 'Shopping Cart',
             iconOnly: true,
-            iconProps: { iconName: 'Info' },
-            onClick: () => console.log('Info'),
+            iconProps: { iconName: 'ShoppingCartSolid' },
+            onClick: () => console.log('Shopping Cart'),
         },
     ];
     return (
