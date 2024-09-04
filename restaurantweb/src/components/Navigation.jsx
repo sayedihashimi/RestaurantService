@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './Navigation.css';
 import { Link } from '@fluentui/react';
 import { DefaultButton, CommandBar } from '@fluentui/react';
-import { FocusTrapZone } from '@fluentui/react/lib/FocusTrapZone';
 
 function Navigation() {
     const navigate = useNavigate();
@@ -22,10 +21,10 @@ function Navigation() {
             onClick: () => navigate('/menu'),
         },
         {
-            key: 'contact',
-            text: 'Contact',
-            iconProps: { iconName: 'ContactInfo' },
-            onClick: () => navigate('/contact'),
+            key: 'new-order',
+            text: 'New Order',
+            iconProps: { iconName: 'AddToShoppingList' },
+            onClick: () => navigate('/new-order'),
         },
     ];
     // TODO: far items don't do anything yet, they should do something.

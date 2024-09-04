@@ -1,14 +1,12 @@
 :root {
-    --primary-green: hsl(105, 25%, 32%); /* Earthy Green */
-    --secondary-beige: hsl(42, 69%, 87%); /* Warm Beige */
-    --accent-terracotta: hsl(14, 42%, 49%); /* Deep Terracotta */
-    --neutral-gray: hsl(0, 0%, 88%); /* Light Gray */
-    --text-charcoal: hsl(0, 0%, 20%); /* Dark Charcoal */
-    --highlight-yellow: hsl(43, 82%, 66%); /* Soft Yellow */
+    --first-color: hsl(217, 10%, 84%); /* Light Gray */
+    --second-color: hsl(205, 16%, 27%); /* Dark Grayish Blue */
+    --third-color: hsl(212, 15%, 22%); /* Dark Charcoal */
+    --fourth-color: hsl(352, 59%, 47%); /* Deep Red */
 }
 
 body {
-    background-color: var(--primary-green);
+    background-color: var(--third-color);
 }
 #root {
   margin: 0 auto;

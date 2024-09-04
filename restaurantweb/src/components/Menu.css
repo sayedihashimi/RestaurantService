@@ -4,14 +4,14 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 16px;
     padding: 16px;
-    color: var(--text-charcoal);
+    color: var(--first-color);
 }
 
 .menu-item {
     border: 1px solid #ccc;
     border-radius: 2rem;
     padding: .5rem;
-    background-color: var(--secondary-beige);
+    background-color: var(--second-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
 }
