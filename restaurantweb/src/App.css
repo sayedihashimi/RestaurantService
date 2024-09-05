@@ -4,13 +4,13 @@
     --third-color: hsl(212, 15%, 22%); /* Dark Charcoal */
     --fourth-color: hsl(352, 59%, 47%); /* Deep Red */
 }
-
-body {
-    background-color: var(--third-color);
+#root{
+    width: 100%;
+    height: 100%;
+    background-color:red;
 }
-#root {
+#main {
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
   width:100%;  
   padding-top: 4rem; /* to give space for the header  */

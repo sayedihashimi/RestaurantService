@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom";
 
 function Layout() {
   return (
-      <>
+      <div id="main">
         <Navigation />
         <Outlet />
-      </>
+      </div>
   );
 }
 
