@@ -8,22 +8,34 @@ import {
 } from "@fluentui/react-components";
 import {
     HomeFilled,
-    DocumentBulletListMultipleFilled,
-    ShoppingBagFilled
+    ShoppingBagFilled,
+    ClipboardBulletListFilled,
+    DocumentAddFilled
 } from "@fluentui/react-icons"
 
 const useStyles = makeStyles({
     toolbar: {
         justifyContent: "space-between",
     },
+    activePage: {
+        color:'var(--third-color)',
+        backgroundColor: 'var(--first-color)',
+        ':hover': {
+            backgroundColor: 'var(--first-color)',
+            color: 'var(--third-color)',
+        },
+    },
 });
+
 function Navigation() {
-    const farGroupStyles = useStyles();
+    const navStyles = useStyles();
     const navigate = useNavigate();
+    const currentPath = window.location.pathname;
+
     return (
         <nav>
             <Toolbar
-                className={farGroupStyles.toolbar}
+                className={navStyles.toolbar}
                 size="large"
                 style={{
                     border: "2px solid black",
@@ -34,20 +46,30 @@ function Navigation() {
                     <ToolbarButton
                         aria-label="Home"
                         icon={<HomeFilled />}
-                        onClick={() => navigate('/')}>
-                        Home
+                        onClick={() => navigate('/')}
+                        className={currentPath == '/' ? navStyles.activePage : ''}>
+                            Home
                     </ToolbarButton>
                     <ToolbarButton
                         aria-label="Menu"
-                        icon={<DocumentBulletListMultipleFilled />}
-                        onClick={() => navigate('/menu')}>
+                        icon={<ClipboardBulletListFilled />}
+                        onClick={() => navigate('/menu')}
+                        className={currentPath == '/menu' ? navStyles.activePage : ''}>
+                        Menu
+                    </ToolbarButton>
+                    <ToolbarButton
+                        aria-label="New order"
+                        icon={<DocumentAddFilled />}
+                        onClick={() => navigate('/new-order')}
+                        className={currentPath == '/new-order' ? navStyles.activePage : ''}>
                         New Order
                     </ToolbarButton>
                 </ToolbarGroup>
                 <ToolbarGroup>
                     <ToolbarButton
                         aria-label="shopping cart"
-                        icon={<ShoppingBagFilled />}>
+                        icon={<ShoppingBagFilled />}
+                        className={currentPath == '/shopping-cart' ? navStyles.activePage : ''}>
                         Shopping Cart
                     </ToolbarButton>
                 </ToolbarGroup>
