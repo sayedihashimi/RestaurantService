@@ -1,0 +1,42 @@
+.customerContainer {
+    background-color: hsl(111, 25%, 25%); /* Darker background color */
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .customerContainer p {
+        font-size: 1.2rem;
+        color: hsl(111, 25%, 85%);
+    }
+
+    .customerContainer select {
+        padding: 0.5rem;
+        font-size: 1rem;
+        border-radius: 4px;
+        border: 1px solid hsl(111, 25%, 50%);
+        background-color: hsl(111, 25%, 30%);
+        color: hsl(111, 25%, 85%);
+        margin-left: 0.5rem;
+    }
+
+    .customerContainer ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .customerContainer li {
+        background-color: hsl(111, 25%, 30%);
+        border: 1px solid hsl(111, 25%, 40%);
+        border-radius: 4px;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        color: hsl(111, 25%, 85%);
+    }
+
+        .customerContainer li strong {
+            color: hsl(111, 25%, 75%);
+        }
