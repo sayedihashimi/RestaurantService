@@ -38,7 +38,7 @@ function CustomerInfo() {
               <ul>
                   {Object.entries(selectedContactDetails).map(([key, value]) => (
                       <li key={key} hidden={key == 'name'}>
-                          <strong>{key}:</strong> {value}
+                          <strong>{key}:</strong> <span>{value}</span>
                       </li>
                   ))}
               </ul>
