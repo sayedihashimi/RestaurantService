@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import NewOrderPage from './pages/NewOrderPage';
 import Layout from './Layout';
+import SignIn from './pages/SignIn';
 
 function App() {
     return (
@@ -18,11 +19,11 @@ function App() {
                     <Route path='/contact' element={<Contact />} />
                     <Route path='/menu' element={<Menu />} />
                     <Route path='/new-order' element={<NewOrderPage />} />
+                    <Route path='/sign-in' element={<SignIn />} />
                     <Route path='*' element={<NotFound />} />
                 </Route>                
             </Routes>            
-        </BrowserRouter>          
-        
+        </BrowserRouter>
     );
 }
 export default App;

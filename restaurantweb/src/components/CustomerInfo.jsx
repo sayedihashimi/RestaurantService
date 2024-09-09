@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from "@fluentui/react-components";
 import './CustomerInfo.css';
+
 function CustomerInfo() {
     const [contacts, setContacts] = useState([]);
     const [selectedContact, setSelectedContact] = useState('');
@@ -35,13 +37,18 @@ function CustomerInfo() {
               </select></p>
 
           {selectedContactDetails && (
-              <ul>
-                  {Object.entries(selectedContactDetails).map(([key, value]) => (
-                      <li key={key} hidden={key == 'name'}>
-                          <strong>{key}:</strong> <span>{value}</span>
-                      </li>
-                  ))}
-              </ul>
+              <>              
+                  <ul>
+                      {Object.entries(selectedContactDetails).map(([key, value]) => (
+                          <li key={key} hidden={key == 'name'}>
+                              <strong>{key}:</strong> <span>{value}</span>
+                          </li>
+                      ))}
+                  </ul>
+                  <Button>
+                    Sign In
+                  </Button>
+              </>
           )}
       </div>
   );

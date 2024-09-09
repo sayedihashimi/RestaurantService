@@ -10,8 +10,10 @@ import {
     HomeFilled,
     ShoppingBagFilled,
     ClipboardBulletListFilled,
+    PersonCircleFilled,
     DocumentAddFilled
 } from "@fluentui/react-icons"
+import SignInToolbarText from './SignInToolbarText';
 
 const useStyles = makeStyles({
     toolbar: {
@@ -71,6 +73,13 @@ function Navigation() {
                         icon={<ShoppingBagFilled />}
                         className={currentPath == '/shopping-cart' ? navStyles.activePage : ''}>
                         Shopping Cart
+                    </ToolbarButton>
+                    <ToolbarButton
+                        aria-label="signin"
+                        icon={<PersonCircleFilled />}
+                        onClick={()=>navigate('sign-in') }
+                        className={currentPath == '/shopping-cart' ? navStyles.activePage : ''}>
+                        <SignInToolbarText />
                     </ToolbarButton>
                 </ToolbarGroup>
             </Toolbar>
