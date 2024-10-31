@@ -7,13 +7,9 @@ using MyRestaurantApi;
 
 namespace MyRestaurantApi.Data
 {
-    public class MyRestaurantApiContext : DbContext
+    public class MyRestaurantApiContext(DbContextOptions<MyRestaurantApiContext> options) : DbContext(options)
     {
-        public MyRestaurantApiContext (DbContextOptions<MyRestaurantApiContext> options)
-            : base(options)
-        {
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+		protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<MenuItem>().HasData(GetSeedDataMenuItems());
             modelBuilder.Entity<Contact>().HasData(GetSeedDataContacts());
         }
@@ -23,9 +19,9 @@ namespace MyRestaurantApi.Data
 
         public DbSet<MyRestaurantApi.MenuItemOrdered> MenuItemOrdered { get; set; } = default!;
 
-        private MenuItem[] GetSeedDataMenuItems() => new MenuItem[] {
+        private MenuItem[] GetSeedDataMenuItems() => [
 			// breakfast items
-			new MenuItem {
+			new() {
 				Id = 1001,
 				Name = "Two eggs and toast",
 				Price = (decimal)6.09,
@@ -33,7 +29,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Breakfast,
 				EmojiName = "🍳🍳🍞"
 			},
-			new MenuItem {
+			new() {
 				Id = 1002,
 				Name = "Steak and Two eggs",
 				Price = (decimal)10.09,
@@ -42,7 +38,7 @@ namespace MyRestaurantApi.Data
 				EmojiName = "🥩🍳🍳"
 			},
 
-			new MenuItem {
+			new() {
 				Id = 2000,
 				Name = "Fried Chicken & Waffle",
 				Price = (decimal)16.79,
@@ -50,7 +46,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🍗🧇"
 			},
-			new MenuItem {
+			new() {
 				Id = 2001,
 				Name = "Steak & Scramble Bowl",
 				Price = (decimal)13.79,
@@ -58,7 +54,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🥩🍳🍅🥔"
 			},
-			new MenuItem {
+			new() {
 				Id = 2002,
 				Name = "Strawberry Shortcake Waffle",
 				Price = (decimal)10.49,
@@ -66,7 +62,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🍓🍰🧇"
 			},
-			new MenuItem {
+			new() {
 				Id = 2003,
 				Name = "Country Fried Steak",
 				Price = (decimal)16.99,
@@ -74,7 +70,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🥩🍳🍳"
 			},
-			new MenuItem {
+			new() {
 				Id = 2004,
 				Name = "Tangy Chicken Bowl",
 				Price = (decimal)10.99,
@@ -83,7 +79,7 @@ namespace MyRestaurantApi.Data
 				EmojiName = "🍗🍍🍚"
 			},
 
-			new MenuItem {
+			new() {
 				Id = 2005,
 				Name = "Hamburger",
 				Price = (decimal)3.68,
@@ -91,7 +87,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🍔"
 			},
-			new MenuItem {
+			new() {
 				Id = 2006,
 				Name = "Hamburger - double",
 				Price = (decimal)5.70,
@@ -99,7 +95,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🍔🍔"
 			},
-			new MenuItem {
+			new() {
 				Id = 2007,
 				Name = "Cheeseburger",
 				Price = (decimal)4.09,
@@ -107,7 +103,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🍔🧀"
 			},
-			new MenuItem {
+			new() {
 				Id = 2008,
 				Name = "Cheeseburger - double",
 				Price = (decimal)5.09,
@@ -115,7 +111,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🍔🍔🧀"
 			},
-			new MenuItem {
+			new() {
 				Id = 2009,
 				Name = "Mushroom & Swiss burger",
 				Price = (decimal)4.59,
@@ -123,7 +119,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Lunch,
 				EmojiName = "🍔🍄🧀"
 			},
-			new MenuItem {
+			new() {
 				Id = 2010,
 				Name = "Mushroom & Swiss burger - double",
 				Price = (decimal)6.09,
@@ -133,7 +129,7 @@ namespace MyRestaurantApi.Data
 			},
 
 			// dinner items
-			new MenuItem {
+			new() {
 				Id = 3000,
 				Name = "Steak and mashed potatoes",
 				Price = (decimal)15.09,
@@ -141,7 +137,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Dinner,
 				EmojiName = "🥩🥔"
 			},
-			new MenuItem {
+			new() {
 				Id = 3001,
 				Name = "Fish and chips",
 				Price = (decimal)14.49,
@@ -149,7 +145,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Dinner,
 				EmojiName = "🐟🍟"
 			},
-			new MenuItem {
+			new() {
 				Id = 3002,
 				Name = "Sam's famous meatloaf",
 				Price = (decimal)14.49,
@@ -157,7 +153,7 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Dinner,
 				EmojiName = "🍖🍞"
 			},
-			new MenuItem {
+			new() {
 				Id = 3003,
 				Name = "Sam's famous Chicken Pot Pie",
 				Price = (decimal)14.49,
@@ -165,57 +161,57 @@ namespace MyRestaurantApi.Data
 				Category = MenuItemCategory.Dinner,
 				EmojiName = "🍗🥧"
 			}
-		};
-		private Contact[] GetSeedDataContacts() => new Contact[] {
-            new Contact {
+		];
+		private static Contact[] GetSeedDataContacts() => [
+            new() {
                 Id = 1,
                 Name = "Sayed Hashimi",
                 Email = "sayed@example.com",
                 Phone = "555-111-2222"
             },
-            new Contact {
+            new() {
                 Id=2,
                 Name = "Mads Kristensen",
                 Email = "mads@example.com",
                 Phone = "555-111-3333"
             },
-            new Contact {
+            new() {
                 Id=3,
                 Name = "Eline Barstad",
                 Email = "elineb@example.com",
                 Phone = "555-111-4444"
             },
-            new Contact {
+            new() {
                 Id=4,
                 Name = "Theodore Lamy",
                 Email = "theol@example.com",
                 Phone = "555-111-5555"
             },
-            new Contact {
+            new() {
                 Id=5,
                 Name = "María Zelaya",
                 Email = "mariaz@example.com",
                 Phone = "555-111-6666"
             },
-            new Contact {
+            new() {
                 Id=6,
                 Name = "Kubanychbek Sagynbek",
                 Email = "kubans@example.com",
                 Phone = "555-111-7777"
             },
-            new Contact {
+            new() {
                 Id=7,
                 Name = "Denise Bourgeois",
                 Email = "deniseb@example.com",
                 Phone = "555-111-8888"
             },
-            new Contact {
+            new() {
                 Id=8,
                 Name = "Robin Danielsen",
                 Email = "robind@example.com",
                 Phone = "555-111-9999"
             }
-        };
+        ];
         public DbSet<MyRestaurantApi.TogoOrder> TogoOrder { get; set; } = default!;
     }
 }

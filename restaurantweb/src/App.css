@@ -12,8 +12,11 @@
   margin: 0 auto;
   text-align: center;
   width:100%;  
-  padding-top: 4rem; /* to give space for the header  */
+  padding-top: 5rem; /* to give space for the header  */
 }
 *[hidden]{
     display:none;
+}
+p, span, strong {
+    font-size: 1.25rem; /* Adjust the size as needed */
 }
