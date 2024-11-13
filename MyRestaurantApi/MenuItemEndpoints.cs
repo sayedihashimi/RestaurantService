@@ -88,11 +88,12 @@ public static class MenuItemEndpoints
             var affected = await db.MenuItem
                 .Where(model => model.Id == id)
                 .ExecuteUpdateAsync(setters => setters
-                  .SetProperty(m => m.Id, menuItem.Id)
-                  .SetProperty(m => m.Name, menuItem.Name)
-                  .SetProperty(m => m.Price, menuItem.Price)
-                  .SetProperty(m => m.Description, menuItem.Description)
-                  .SetProperty(m => m.Category, menuItem.Category)
+                  .SetProperty(m => m.Id, e => menuItem.Id > 0 ? menuItem.Id : e.Id)
+                  .SetProperty(m => m.Name, e => !string.IsNullOrEmpty(menuItem.Name) ? menuItem.Name : e.Name)
+                  .SetProperty(m => m.Price, e => menuItem.Price.HasValue? menuItem.Price: e.Price)
+                  .SetProperty(m => m.Description, e => !string.IsNullOrEmpty(menuItem.Description) ? menuItem.Description : e.Description)
+                  .SetProperty(m => m.Category, e=> menuItem.Category.HasValue ? menuItem.Category : e.Category)
+                  .SetProperty(m => m.EmojiName, e=> !string.IsNullOrEmpty(menuItem.EmojiName) ? menuItem.EmojiName : e.EmojiName)
                 );
 
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();

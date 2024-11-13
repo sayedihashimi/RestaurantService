@@ -9,8 +9,8 @@ POST {{MyRestaurantApi_HostAddress}}/api/Contact
 Content-Type: application/json
 
 {
-  "name": "VSLive User",
-  "email": "vslive2024@example.com",
+  "name": "{{demoUserName}}",
+  "email": "dotnetconf2024-1@example.com",
   "phone": "404-123-7890"
 }
 
@@ -79,14 +79,55 @@ X-CustomSecret: {{secretFromEncrypted}}
 
 ###
 
+POST {{MyRestaurantApi_HostAddress}}/api/MenuItem
+Content-Type: application/json
 
+{
+  //MenuItem
+}
 
+###
 
+# add a new menu item 
+# @name createMenuItem
+POST {{MyRestaurantApi_HostAddress}}/api/MenuItem
+Content-Type: application/json
 
+{
+  "id": 1005,
+  "name": "Steak and Three eggs",
+  "emojiName": "\uD83E\uDD69\uD83C\uDF73\uD83C\uDF73\uD83C\uDF73",
+  "price": 10.09,
+  "description": "Small steak and two eggs",
+  "category": 0
+}
 
+###
+GET {{MyRestaurantApi_HostAddress}}/api/MenuItem/{{createMenuItem.response.body.$.id}}
 
+###
+PUT {{MyRestaurantApi_HostAddress}}/api/MenuItem/{{createMenuItem.response.body.$.id}}
+Content-Type: application/json
 
+{
+  "id": {{createMenuItem.response.body.$.id}},
+  "description": "Small steak and three eggs!!!"
+}
+###
+GET {{MyRestaurantApi_HostAddress}}/api/MenuItem/{{createMenuItem.response.body.$.id}}
 
+###
+
+GET {{MyRestaurantApi_HostAddress}}/api/MenuItem
+
+###
+GET https://localhost:7293/api/MenuItem
+###
+
+GET https://httpbin.org/headers
+X-CUSTOM: {{MyRestaurantApi_HostAddress}}
+
+###
 
 
 
