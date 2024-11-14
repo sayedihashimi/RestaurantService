@@ -1,0 +1,79 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+# HTTP File basics
+# - Comments start with a `#`
+# - Variables are declared with `@variableName`
+# - Variables are referenced with `{{variableName}}`
+# -   Only declare/assign variables once per file
+# - Headers can be added immediately after the request line (no blank lines)
+# - Seperate body from headers/request line with a blank line
+# - `###` is used to separate requests
+# - Use Request Variables to use a value from a previous response
+# -    Use syntax: # @name VARIABLE_NAME
+
+
+# Example of a variable declaration, only declare/assign vars once per file
+@hostAddress = https://localhost:7293
+
+# Simple GET request
+GET {{hostAddress}}/api/Contact
+
+###
+
+GET https://httpbin.org/headers
+X-Custom-Header: some-value-here
+
+###
+
+POST https://httpbin.org/anything
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "role":"Software Developer"
+}
+
+###
+
+# Make a Request Variable named 'uuid'
+# @name uuid
+GET https://httpbin.org/uuid
+
+###
+# Use the new id created and pass it in as a header
+GET https://httpbin.org/headers
+X-ID: {{uuid.response.body.$.uuid}}
+
+###
+# @name samplePostRequest
+POST https://reqres.in/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "isSubscribed": true,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  },
+  "preferences": {
+    "notifications": {
+      "email": true,
+      "sms": false
+    },
+    "theme": "dark"
+  }
+}
+
+
+###
+GET https://httpbin.org/headers
+X-Custom-Header: {{samplePostRequest.response.body.$.preferences.notifications.email}}
+
+###
