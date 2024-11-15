@@ -74,6 +74,6 @@ Content-Type: application/json
 
 ###
 GET https://httpbin.org/headers
-X-Custom-Header: {{samplePostRequest.response.body.$.preferences.notifications.email}}
+X-Custom-Header: {{samplePostRequest.response.body.$.preferences.theme}}
 
 ###
