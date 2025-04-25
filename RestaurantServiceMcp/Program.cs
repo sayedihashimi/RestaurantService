@@ -11,9 +11,15 @@ builder.Logging.AddConsole(consoleLogOptions =>{
     consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
 });
 
-builder.Services.AddSingleton(builder.Configuration);
+// builder.Services.AddSingleton(builder.Configuration);
 
 builder.Services
+    .AddSingleton(
+        new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .Build()
+    )
     .AddMcpServer()
     .WithStdioServerTransport()
     .WithToolsFromAssembly();

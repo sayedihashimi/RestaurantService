@@ -13,7 +13,7 @@ public class TogoOrderTool
 
     public TogoOrderTool(IConfiguration configuration)
     {
-        baseUrl = configuration["Config:RestaurantApiBaseUrl"] ?? "http://localhost:5192";
+        baseUrl = configuration["Config:RestaurantApiBaseUrl"] ?? "http://localhost:5000";
     }
 
     [McpServerTool, Description("Get all togo orders.")]

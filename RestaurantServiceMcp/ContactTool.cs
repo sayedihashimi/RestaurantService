@@ -14,7 +14,7 @@ public class ContactTool
 
     public ContactTool(IConfiguration configuration)
     {
-        baseUrl = configuration["Config:RestaurantApiBaseUrl"] ?? "http://localhost:5192";
+        baseUrl = configuration["Config:RestaurantApiBaseUrl"] ?? "http://localhost:5000";
     }
 
     [McpServerTool, Description("Get all contacts.")]
