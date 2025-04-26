@@ -6,22 +6,31 @@ using ModelContextProtocol.Server;
 using System.ComponentModel;
 
 var builder = Host.CreateApplicationBuilder(args);
-builder.Logging.AddConsole(consoleLogOptions =>{
+
+builder.Logging.AddConsole(consoleLogOptions => {
     // Configure all logs to go to stderr
     consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
 });
 
-// builder.Services.AddSingleton(builder.Configuration);
-
-builder.Services
-    .AddSingleton(
-        new ConfigurationBuilder()
+var config = new ConfigurationBuilder()
+            .SetBasePath(Path.GetDirectoryName(typeof(Program).Assembly.Location)!)
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables()
-            .Build()
-    )
+            .Build();
+
+ConfigureTools(config);
+
+builder.Services
+    .AddSingleton<IConfiguration>(config)
     .AddMcpServer()
     .WithStdioServerTransport()
     .WithToolsFromAssembly();
 
 await builder.Build().RunAsync();
+
+void ConfigureTools(IConfiguration configuration) {
+    ContactTool.SetConfiguration(configuration);
+    MenuItemTool.SetConfiguration(configuration);
+    MenuItemOrderedTool.SetConfiguration(configuration);
+    TogoOrderTool.SetConfiguration(configuration);
+}

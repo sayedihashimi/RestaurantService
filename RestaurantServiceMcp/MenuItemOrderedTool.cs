@@ -1,33 +1,37 @@
 using ModelContextProtocol.Server;
+using Microsoft.Extensions.Configuration;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
 [McpServerToolType]
-public class MenuItemOrderedTool
+public static class MenuItemOrderedTool
 {
-    private readonly HttpClient httpClient = new HttpClient();
-    private readonly string baseUrl;
+    private static readonly HttpClient httpClient = new HttpClient();
+    private static IConfiguration? _configuration;
+    private static string? _baseUrl;
 
-    public MenuItemOrderedTool(IConfiguration configuration)
+    public static void SetConfiguration(IConfiguration configuration)
     {
-        baseUrl = configuration["Config:RestaurantApiBaseUrl"] ?? "http://localhost:5000";
+        _configuration = configuration;
+        _baseUrl = _configuration["Config:RestaurantApiBaseUrl"] ?? "http://localhost:5000";
     }
 
+    private static string BaseUrl => _baseUrl ?? "http://localhost:5000";
+
     [McpServerTool, Description("Get all menu items ordered.")]
-    public async Task<string> GetAllMenuItemOrderedsAsync()
+    public static async Task<string> GetAllMenuItemOrderedsAsync()
     {
-        var response = await httpClient.GetAsync($"{baseUrl}/api/MenuItemOrdered");
+        var response = await httpClient.GetAsync($"{BaseUrl}/api/MenuItemOrdered");
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync();
     }
 
     [McpServerTool, Description("Get a menu item ordered by its Id.")]
-    public async Task<string?> GetMenuItemOrderedByIdAsync(int id)
+    public static async Task<string> GetMenuItemOrderedByIdAsync(int id)
     {
-        var response = await httpClient.GetAsync($"{baseUrl}/api/MenuItemOrdered/{id}");
+        var response = await httpClient.GetAsync($"{BaseUrl}/api/MenuItemOrdered/{id}");
         if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             return null;
         response.EnsureSuccessStatusCode();
@@ -35,9 +39,9 @@ public class MenuItemOrderedTool
     }
 
     [McpServerTool, Description("Get menu items ordered by TogoOrder Id.")]
-    public async Task<string?> GetMenuItemOrderedByTogoOrderIdAsync(int togoOrderId)
+    public static async Task<string> GetMenuItemOrderedByTogoOrderIdAsync(int togoOrderId)
     {
-        var response = await httpClient.GetAsync($"{baseUrl}/api/MenuItemOrdered/togoorder/{togoOrderId}");
+        var response = await httpClient.GetAsync($"{BaseUrl}/api/MenuItemOrdered/togoorder/{togoOrderId}");
         if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             return null;
         response.EnsureSuccessStatusCode();
@@ -45,19 +49,19 @@ public class MenuItemOrderedTool
     }
 
     [McpServerTool, Description("Create a new menu item ordered.")]
-    public async Task<string> CreateMenuItemOrderedAsync(string menuItemOrderedJson)
+    public static async Task<string> CreateMenuItemOrderedAsync(string menuItemOrderedJson)
     {
         var content = new StringContent(menuItemOrderedJson, Encoding.UTF8, "application/json");
-        var response = await httpClient.PostAsync($"{baseUrl}/api/MenuItemOrdered", content);
+        var response = await httpClient.PostAsync($"{BaseUrl}/api/MenuItemOrdered", content);
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync();
     }
 
     [McpServerTool, Description("Update a menu item ordered by Id.")]
-    public async Task<string?> UpdateMenuItemOrderedAsync(int id, string menuItemOrderedJson)
+    public static async Task<string> UpdateMenuItemOrderedAsync(int id, string menuItemOrderedJson)
     {
         var content = new StringContent(menuItemOrderedJson, Encoding.UTF8, "application/json");
-        var response = await httpClient.PutAsync($"{baseUrl}/api/MenuItemOrdered/{id}", content);
+        var response = await httpClient.PutAsync($"{BaseUrl}/api/MenuItemOrdered/{id}", content);
         if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             return null;
         response.EnsureSuccessStatusCode();
@@ -65,9 +69,9 @@ public class MenuItemOrderedTool
     }
 
     [McpServerTool, Description("Delete a menu item ordered by Id.")]
-    public async Task<bool> DeleteMenuItemOrderedAsync(int id)
+    public static async Task<bool> DeleteMenuItemOrderedAsync(int id)
     {
-        var response = await httpClient.DeleteAsync($"{baseUrl}/api/MenuItemOrdered/{id}");
+        var response = await httpClient.DeleteAsync($"{BaseUrl}/api/MenuItemOrdered/{id}");
         if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             return false;
         response.EnsureSuccessStatusCode();
