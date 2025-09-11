@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MyRestaurant.AppHost/MyRestaurant.AppHost.csproj" />
+  <Project Path="MyRestaurant.ServiceDefaults/MyRestaurant.ServiceDefaults.csproj" />
+</Solution>
