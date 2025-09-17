@@ -4,15 +4,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>24c92f86-3c5b-4a74-8691-7fbcea9c6d30</UserSecretsId>
-    <SpaRoot>..\restaurantweb</SpaRoot>
+    <!-- <SpaRoot>..\restaurantweb</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
-    <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
+    <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl> -->
   </PropertyGroup>
   <ItemGroup>
     <None Include="http-client.env.json.user" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="9.0.4" />
+    <!-- <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="9.0.4" /> -->
+    <PackageReference Include="CommunityToolkit.Aspire.Microsoft.EntityFrameworkCore.Sqlite" Version="9.7.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4" />
@@ -21,8 +22,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestaurantWeb\restaurantweb.esproj">
+    <ProjectReference Include="..\MyRestaurantApi.ServiceDefaults\MyRestaurantApi.ServiceDefaults.csproj" />
+    <!-- <ProjectReference Include="..\RestaurantWeb\restaurantweb.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
+    </ProjectReference> -->
   </ItemGroup>
 </Project>
