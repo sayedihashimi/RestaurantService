@@ -5,9 +5,15 @@ using MyRestaurantApi;
 using Microsoft.Extensions.FileProviders;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddSqliteDbContext<MyRestaurantApiContext>("restaurantdb");
+// builder.Services.AddDbContext<MyRestaurantApiContext>(options =>
+//     options.UseSqlite(builder.Configuration.GetConnectionString("MyRestaurantApiContext") ?? throw new InvalidOperationException("Connection string 'MyRestaurantApiContext' not found.")));
+
 builder.AddServiceDefaults();
-builder.Services.AddDbContext<MyRestaurantApiContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("MyRestaurantApiContext") ?? throw new InvalidOperationException("Connection string 'MyRestaurantApiContext' not found.")));
+// Add services to the container.
+builder.Services.AddProblemDetails();
+
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -44,6 +50,10 @@ app.MapMenuItemOrderedEndpoints();
 app.MapTogoOrderEndpoints();
 
 app.MapFallbackToFile("/index.html");
+
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetRequiredService<MyRestaurantApiContext>();
+await dbContext.Database.MigrateAsync();
 
 app.Run();
 
