@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="MyRestaurant.AppHost/MyRestaurant.AppHost.csproj" />
-  <Project Path="MyRestaurant.ServiceDefaults/MyRestaurant.ServiceDefaults.csproj" />
-  <Project Path="MyRestaurantApi/MyRestaurantApi.csproj" />
-</Solution>
