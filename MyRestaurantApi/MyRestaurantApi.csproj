@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyRestaurantApi.ServiceDefaults\MyRestaurantApi.ServiceDefaults.csproj" />
     <ProjectReference Include="..\RestaurantWeb\restaurantweb.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>

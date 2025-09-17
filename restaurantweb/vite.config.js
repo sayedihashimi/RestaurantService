@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite'
 import plugin from '@vitejs/plugin-react';
 import fs from 'fs';
 import path from 'path';
@@ -25,28 +25,41 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
         throw new Error("Could not create certificate.");
     }
 }
-const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:7293';
+// const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
+//     env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:7293';
 // https://vitejs.dev/config/
-export default defineConfig({
-    plugins: [plugin()],
-    resolve: {
-        alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
-        }
-    },
-    server: {
-        proxy: {
-            '^/api/*': {
-                target,
-                secure: false
+export default defineConfig(({mode}) =>{
+    const env = loadEnv(mode, process.cwd(), '');
+
+    return {
+        plugins: [plugin()],
+        resolve: {
+            alias: {
+                '@': fileURLToPath(new URL('./src', import.meta.url))
             }
         },
-        port: 5173,
-        https: {
-            key: fs.readFileSync(keyFilePath),
-            cert: fs.readFileSync(certFilePath),
+        server: {
+            proxy: {
+                '/api': {
+                    target: process.env.services__myrestaurantapi__https__0 || process.env.services__myrestaurantapi__http__0,
+                    changeOrigin: true,
+                    secure: false //,
+                    // rewrite: (path) => path.replace(/^\/api/, '')
+                }
+            },
+            port: parseInt(env.VITE_PORT) //,
+            // https: {
+            //     key: fs.readFileSync(keyFilePath),
+            //     cert: fs.readFileSync(certFilePath),
+            // }
+        },
+        build:{
+            outDir: 'dist',
+            rollupOptions: {
+                input: './index.html'
+            }
         }
     }
+
 })
 

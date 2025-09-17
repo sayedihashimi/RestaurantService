@@ -42,7 +42,8 @@ function Menu() {
     );
 
     async function populateMenuItems() {
-        const response = await fetch('api/menuitem');
+        console.log("Fetching menu items...");
+        const response = await fetch('/api/menuitem');
         const data = await response.json();
         setMenuItems(data);
     }
