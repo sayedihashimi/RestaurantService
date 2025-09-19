@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup>
+        <HotReloadAutoRestart>true</HotReloadAutoRestart>
+    </PropertyGroup>
+</Project>
