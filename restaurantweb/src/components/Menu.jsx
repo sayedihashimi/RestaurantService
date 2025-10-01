@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import { useEffect,useState } from 'react';
 import MenuItem from './MenuItem';
 import './Menu.css';
 import { makeStyles, Spinner } from "@fluentui/react-components";
