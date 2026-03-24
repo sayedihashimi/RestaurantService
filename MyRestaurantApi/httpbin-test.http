@@ -1,0 +1,488 @@
+###############################################################################
+# httpbin-test.http
+# A comprehensive .http file to exercise Visual Studio HTTP editor features
+# using httpbin.org — a free HTTP request/response testing service.
+###############################################################################
+
+# ─── Variables ───────────────────────────────────────────────────────────────
+@baseUrl = https://httpbin.org
+@jsonContentType = application/json
+@xmlContentType = application/xml
+@sampleUser = testuser
+@samplePassword = testpass123
+@bearerToken = my-secret-token-12345
+
+###############################################################################
+# 1. BASIC GET — Simple request, no headers
+# Exercises: basic GET, variable substitution
+###############################################################################
+
+GET {{baseUrl}}/get
+
+###############################################################################
+# 2. GET WITH QUERY PARAMETERS
+# Exercises: query string parameters in URL
+###############################################################################
+
+GET {{baseUrl}}/get?search=hello&page=1&sort=asc
+
+###############################################################################
+# 3. GET WITH CUSTOM HEADERS
+# Exercises: custom headers, Accept header
+###############################################################################
+
+GET {{baseUrl}}/headers
+Accept: {{jsonContentType}}
+X-Custom-Header: MyCustomValue
+X-Request-Source: VisualStudio-HttpEditor
+
+###############################################################################
+# 4. GET — Request Inspection: IP Address
+# Exercises: simple GET returning JSON
+###############################################################################
+
+GET {{baseUrl}}/ip
+
+###############################################################################
+# 5. GET — Request Inspection: User-Agent
+# Exercises: User-Agent header inspection
+###############################################################################
+
+GET {{baseUrl}}/user-agent
+
+###############################################################################
+# 6. POST WITH JSON BODY
+# Exercises: POST method, Content-Type header, JSON request body
+###############################################################################
+
+POST {{baseUrl}}/post
+Content-Type: {{jsonContentType}}
+Accept: {{jsonContentType}}
+
+{
+    "name": "Visual Studio HTTP Editor Test",
+    "version": 17.8,
+    "features": ["variables", "headers", "request-body", "comments"],
+    "metadata": {
+        "author": "developer",
+        "environment": "testing"
+    }
+}
+
+###############################################################################
+# 7. PUT WITH JSON BODY
+# Exercises: PUT method, request body
+###############################################################################
+
+PUT {{baseUrl}}/put
+Content-Type: {{jsonContentType}}
+
+{
+    "id": 42,
+    "name": "Updated Resource",
+    "status": "active",
+    "tags": ["updated", "http-test"]
+}
+
+###############################################################################
+# 8. PATCH WITH JSON BODY
+# Exercises: PATCH method, partial update body
+###############################################################################
+
+PATCH {{baseUrl}}/patch
+Content-Type: {{jsonContentType}}
+
+{
+    "status": "modified",
+    "lastUpdated": "2026-03-24"
+}
+
+###############################################################################
+# 9. DELETE
+# Exercises: DELETE method
+###############################################################################
+
+DELETE {{baseUrl}}/delete
+
+###############################################################################
+# 10. NAMED REQUEST + REQUEST VARIABLE — Get a UUID, then use it
+# Exercises: @name directive, request variables, response body extraction
+###############################################################################
+
+# @name getUuid
+GET {{baseUrl}}/uuid
+
+###
+
+// Use the UUID from the previous response as a custom header
+GET {{baseUrl}}/headers
+X-Trace-Id: {{getUuid.response.body.$.uuid}}
+
+###############################################################################
+# 11. NAMED REQUEST + REQUEST VARIABLE — POST then reference
+# Exercises: request variables with POST, JSONPath extraction
+###############################################################################
+
+# @name postData
+POST {{baseUrl}}/post
+Content-Type: {{jsonContentType}}
+
+{
+    "orderId": "ORD-98765",
+    "item": "Widget",
+    "quantity": 3
+}
+
+###
+
+// Echo back the URL from the POST response using a request variable
+GET {{baseUrl}}/get?previousUrl={{postData.response.body.$.url}}
+
+###############################################################################
+# 12. BEARER TOKEN AUTHENTICATION
+# Exercises: Authorization header, Bearer token, variable in header
+###############################################################################
+
+GET {{baseUrl}}/bearer
+Authorization: Bearer {{bearerToken}}
+
+###############################################################################
+# 13. BASIC AUTHENTICATION
+# Exercises: Basic Auth endpoint, variables in URL path
+###############################################################################
+
+GET {{baseUrl}}/basic-auth/{{sampleUser}}/{{samplePassword}}
+Authorization: Basic dGVzdHVzZXI6dGVzdHBhc3MxMjM=
+
+###############################################################################
+# 14. STATUS CODES — various HTTP status codes
+# Exercises: path parameters, status code testing
+###############################################################################
+
+// 200 OK
+GET {{baseUrl}}/status/200
+
+###
+
+// 201 Created
+GET {{baseUrl}}/status/201
+
+###
+
+// 204 No Content
+GET {{baseUrl}}/status/204
+
+###
+
+// 400 Bad Request
+GET {{baseUrl}}/status/400
+
+###
+
+// 404 Not Found
+GET {{baseUrl}}/status/404
+
+###
+
+// 500 Internal Server Error
+GET {{baseUrl}}/status/500
+
+###############################################################################
+# 15. BUILT-IN VARIABLE: $randomInt
+# Exercises: $randomInt with min/max range
+###############################################################################
+
+GET {{baseUrl}}/get?randomValue={{$randomInt 1 1000}}&anotherRandom={{$randomInt 0 100}}
+
+###############################################################################
+# 16. BUILT-IN VARIABLE: $datetime (various formats)
+# Exercises: $datetime with rfc1123, iso8601, and custom formats
+###############################################################################
+
+GET {{baseUrl}}/headers
+X-Datetime-RFC1123: {{$datetime rfc1123}}
+X-Datetime-ISO8601: {{$datetime iso8601}}
+X-Datetime-Custom: {{$datetime "yyyy-MM-dd"}}
+
+###############################################################################
+# 17. BUILT-IN VARIABLE: $localDatetime
+# Exercises: $localDatetime with different formats
+###############################################################################
+
+GET {{baseUrl}}/headers
+X-LocalDatetime-RFC1123: {{$localDatetime rfc1123}}
+X-LocalDatetime-ISO8601: {{$localDatetime iso8601}}
+X-LocalDatetime-Custom: {{$localDatetime "dd/MM/yyyy HH:mm:ss"}}
+
+###############################################################################
+# 18. BUILT-IN VARIABLE: $timestamp
+# Exercises: $timestamp (Unix epoch seconds)
+###############################################################################
+
+GET {{baseUrl}}/headers
+X-Timestamp-Now: {{$timestamp}}
+
+###############################################################################
+# 19. DATE/TIME OFFSETS
+# Exercises: $datetime with positive/negative offsets
+###############################################################################
+
+GET {{baseUrl}}/headers
+X-Date-Yesterday: {{$datetime "yyyy-MM-dd" -1 d}}
+X-Date-Tomorrow: {{$datetime "yyyy-MM-dd" 1 d}}
+X-Date-LastWeek: {{$datetime "yyyy-MM-dd" -1 w}}
+X-Date-NextMonth: {{$datetime "yyyy-MM-dd" 1 M}}
+X-Date-LastYear: {{$datetime "yyyy-MM-dd" -1 y}}
+X-Timestamp-Plus1Hour: {{$timestamp 1 h}}
+
+###############################################################################
+# 20. ENVIRONMENT VARIABLE: $processEnv
+# Exercises: reading a system environment variable
+###############################################################################
+
+GET {{baseUrl}}/headers
+X-Machine-Username: {{$processEnv USERNAME}}
+
+###############################################################################
+# 21. HTTP VERSION SPECIFICATION
+# Exercises: specifying HTTP/1.1 version explicitly
+###############################################################################
+
+GET {{baseUrl}}/get HTTP/1.1
+
+###############################################################################
+# 22. RESPONSE FORMATS — JSON
+# Exercises: requesting JSON response
+###############################################################################
+
+GET {{baseUrl}}/json
+Accept: {{jsonContentType}}
+
+###############################################################################
+# 23. RESPONSE FORMATS — XML
+# Exercises: requesting XML response
+###############################################################################
+
+GET {{baseUrl}}/xml
+Accept: {{xmlContentType}}
+
+###############################################################################
+# 24. RESPONSE FORMATS — HTML
+# Exercises: requesting HTML response
+###############################################################################
+
+GET {{baseUrl}}/html
+Accept: text/html
+
+###############################################################################
+# 25. RESPONSE FORMAT — UTF-8 Encoding
+# Exercises: UTF-8 encoded content
+###############################################################################
+
+GET {{baseUrl}}/encoding/utf8
+
+###############################################################################
+# 26. RESPONSE INSPECTION — Response Headers
+# Exercises: query parameters controlling response headers
+###############################################################################
+
+GET {{baseUrl}}/response-headers?X-Custom-Response=hello&X-Another=world
+
+###############################################################################
+# 27. RESPONSE INSPECTION — Cache / ETag
+# Exercises: conditional request headers (If-None-Match)
+###############################################################################
+
+GET {{baseUrl}}/etag/my-etag-value
+If-None-Match: "my-etag-value"
+
+###############################################################################
+# 28. RESPONSE INSPECTION — Cache Control
+# Exercises: cache-control endpoint
+###############################################################################
+
+GET {{baseUrl}}/cache/60
+
+###############################################################################
+# 29. DYNAMIC DATA — UUID generation
+# Exercises: UUID4 response
+###############################################################################
+
+GET {{baseUrl}}/uuid
+
+###############################################################################
+# 30. DYNAMIC DATA — Base64 decode
+# Exercises: path-encoded base64 value
+###############################################################################
+
+GET {{baseUrl}}/base64/SFRUUEJJTiBpcyBhd2Vzb21l
+
+###############################################################################
+# 31. DYNAMIC DATA — Delayed response (2 seconds)
+# Exercises: delayed endpoint for timeout testing
+###############################################################################
+
+GET {{baseUrl}}/delay/2
+
+###############################################################################
+# 32. IMAGES — PNG
+# Exercises: binary response (image)
+###############################################################################
+
+GET {{baseUrl}}/image/png
+Accept: image/png
+
+###############################################################################
+# 33. IMAGES — SVG
+# Exercises: SVG image response
+###############################################################################
+
+GET {{baseUrl}}/image/svg
+Accept: image/svg+xml
+
+###############################################################################
+# 34. GZIP ENCODED RESPONSE
+# Exercises: compressed response handling
+###############################################################################
+
+GET {{baseUrl}}/gzip
+
+###############################################################################
+# 35. DEFLATE ENCODED RESPONSE
+# Exercises: deflate compressed response
+###############################################################################
+
+GET {{baseUrl}}/deflate
+
+###############################################################################
+# 36. ROBOTS.TXT
+# Exercises: plain text response
+###############################################################################
+
+GET {{baseUrl}}/robots.txt
+
+###############################################################################
+# 37. DENY (blocked by robots.txt)
+# Exercises: text/plain response for denied page
+###############################################################################
+
+GET {{baseUrl}}/deny
+
+###############################################################################
+# 38. ANYTHING — echoes everything (GET)
+# Exercises: /anything echo endpoint with query params and headers
+###############################################################################
+
+GET {{baseUrl}}/anything?greeting=hello&language=en
+Accept: {{jsonContentType}}
+X-Correlation-Id: corr-{{$randomInt 10000 99999}}
+
+###############################################################################
+# 39. ANYTHING — echoes everything (POST with body)
+# Exercises: /anything with POST body
+###############################################################################
+
+POST {{baseUrl}}/anything
+Content-Type: {{jsonContentType}}
+X-Request-Timestamp: {{$datetime iso8601}}
+
+{
+    "message": "Testing POST to /anything",
+    "numbers": [1, 2, 3, 4, 5],
+    "nested": {
+        "key": "value",
+        "flag": true
+    }
+}
+
+###############################################################################
+# 40. VARIABLE COMPOSITION — Variables built from other variables
+# Exercises: defining a variable using other variables
+###############################################################################
+
+@protocol = https
+@host = httpbin.org
+@composedUrl = {{protocol}}://{{host}}
+
+GET {{composedUrl}}/get?source=composed-variable
+
+###############################################################################
+# 41. MULTIPLE HEADERS ON SINGLE REQUEST
+# Exercises: many headers at once
+###############################################################################
+
+GET {{baseUrl}}/headers
+Accept: {{jsonContentType}}
+Accept-Language: en-US,en;q=0.9
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+X-Forwarded-For: 192.168.1.1
+X-Request-ID: req-{{$randomInt 100000 999999}}
+X-Timestamp: {{$timestamp}}
+
+###############################################################################
+# 42. POST WITH FORM-STYLE DATA via /anything
+# Exercises: form-urlencoded content type
+###############################################################################
+
+POST {{baseUrl}}/anything
+Content-Type: application/x-www-form-urlencoded
+
+username=testuser&password=testpass&remember=true
+
+###############################################################################
+# 43. NAMED REQUEST CHAIN — multi-step workflow
+# Exercises: chaining named requests, extracting response headers
+###############################################################################
+
+# @name stepOne
+POST {{baseUrl}}/post
+Content-Type: {{jsonContentType}}
+
+{
+    "step": 1,
+    "action": "initialize",
+    "requestId": "init-{{$randomInt 1000 9999}}"
+}
+
+###
+
+// Step 2: Reference the origin IP from step 1
+# @name stepTwo
+POST {{baseUrl}}/post
+Content-Type: {{jsonContentType}}
+X-Previous-Origin: {{stepOne.response.body.$.origin}}
+
+{
+    "step": 2,
+    "action": "continue",
+    "previousOrigin": "{{stepOne.response.body.$.origin}}"
+}
+
+###
+
+// Step 3: Reference data from step 2 
+GET {{baseUrl}}/get?step=3&prevOrigin={{stepTwo.response.body.$.origin}}
+
+###############################################################################
+# 44. COMMENTS — both styles
+# Exercises: # comments and // comments
+###############################################################################
+
+# This is a hash-style comment
+// This is a double-slash-style comment
+GET {{baseUrl}}/get?commentTest=true
+# Headers can also have comments above them (but not inline)
+Accept: {{jsonContentType}}
+
+###############################################################################
+# 45. STREAM JSON RESPONSES
+# Exercises: streaming endpoint
+###############################################################################
+
+GET {{baseUrl}}/stream/3
+
+###############################################################################
+# END OF FILE
+###############################################################################
